@@ -113,7 +113,6 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   
 ### Step 2 — Filter for SSH Authentication Events
 - Scope the dataset to only **sshd** events so the later IOC and failure filters operate on relevant rows and ignore benign cron/systemd/kernel noise present in the data file.
-- Although these files are already SSH-related, write generic filters (so your code is reusable):
   ```python
   # Scope to SSH daemon lines using the Process column
   sshA = dfA[dfA['Process'].eq('sshd')].copy()
@@ -131,9 +130,15 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 - Filter messages containing the IOC and count occurrences:
   ```python
   iocA = '200.30.175.162'
-  ipA  = sshA[sshA['Message'].astype(str).str.contains(iocA, na=False)]
-  len(ipA)
-  ipA.head() 
+  # Minimal cleaning for the trailing-comma edge case
+  sshA['Message_norm'] = sshA['Message'].str.replace(',', ' ', regex=False).str.strip()
+  
+  #Plain substring search
+  ipA = sshA[sshA['Message_norm'].str.contains(iocA, na=False)].copy()
+
+  print("IOC-hit rows (Device A):", len(ipA))
+  display(ipA.head())
+
   ```
 - In the Markdown, write 2–3 sentences: is this sufficient evidence of malicious activity? Why or why not?
 
