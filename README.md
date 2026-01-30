@@ -42,12 +42,10 @@ Common IOC types include:
 
 **Why IOCs matter:** Logs often contain thousands or millions of entries. An IOC gives analysts a starting point:
 ```yml
-“I found this suspicious thing… now show me everything else related to it.”
+“I found this suspicious thing... now show me everything else related to it.”
 ```
-This process is called pivoting.
 
-**IOC Pivoting:**
-Pivoting means filtering and reorganizing logs around the suspicious item. It’s like clicking a person’s username on social media to see all their posts.
+**IOC Pivoting:** Pivoting means filtering and reorganizing logs around the suspicious item. It’s like clicking a person’s username on social media to see all their posts.
 You take one clue and explore every event connected to it.
 In this lab, the IOC is a source IP address sending repeated failed login attempts to an SSH server. This is significant because legitimate users almost never generate dozens of login failures across many usernames.
 
