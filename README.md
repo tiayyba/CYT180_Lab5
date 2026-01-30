@@ -39,7 +39,9 @@ By the end of Lab 5, you will be able to:
 
   - 200.30.175.162 (Device A) in task_2_logs.csv
   - 220.30.175.162 (Device B) in otherdevice.csv
-
+An IOC is simply a clue that something suspicious might be happening.
+Examples include an unusual IP address trying to log in repeatedly, a strange file name, or a domain known to host malware.
+Analysts use these clues to narrow down thousands of log entries and focus only on activity related to the threat.
 ----
 
 ## Dataset Walkthrough
