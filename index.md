@@ -2,7 +2,7 @@
 # CYT180 — Lab 5: Log Analysis with Pandas, IOCs, and the Mapper Concept  
 **Weight:** 3%  
 **Work Type:** Individual  
-**Submission Format:** 2‑Minute Video (see Submission Instructions)
+**Submission Format:** 2‑3 Minute Video (see Submission Instructions)
 
 ---
 
