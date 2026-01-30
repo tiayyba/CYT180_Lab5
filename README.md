@@ -77,7 +77,6 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 ### Task 2 — Filter for SSH Authentication Events
 - Although these files are already SSH-related, write generic filters (so your code is reusable):
   ```python
-  import pandas as pd
   sshA = dfA[dfA['ProcessID'].astype(str).str.contains('sshd', na=False)]
   len(sshA)
   ```
@@ -106,6 +105,3 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   len(failA)
   failA
 ```
-- Answer in Markdown:
-  - How many suspicious authentication failures are present for Device A?
-  - What patterns do you notice (usernames, ports, repetition)?
