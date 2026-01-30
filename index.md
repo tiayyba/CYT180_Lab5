@@ -87,7 +87,9 @@ Examples you’ll see:
   - Invalid user admin from 220.30.175.162,
   - Failed password for invalid user slasher from 220.30.175.162
 
-**Note**: You may see an IPv6 address (e.g., fe80::1). You do not need special code for IPv6 — just ignore those lines. There is one line where the IOC is followed by a comma—your filters should handle this edge cases.
+**Note**:
+- You may see an IPv6 address (e.g., fe80::1). You do not need special code for IPv6 — just ignore those lines.
+-  There is one line where the IOC is followed by a comma—your filters should handle this edge cases.
 
 ----
 
