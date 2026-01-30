@@ -116,7 +116,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   - How many SSH log lines exist?
   - Why is filtering by process valuable for triage?
 
-### Step 3 — IOC Filtering (Pivoting) for Device A 
+### Step 3 — IOC Filtering (Pivoting)
 - Use the suspected IOC for **Device A: 200.30.175.162**
 - Filter messages containing the IOC and count occurrences:
   ```python
@@ -143,27 +143,34 @@ Create a new notebook in Google Colab and copy the code step by step, understand
     
 ### Step 5 — Mapper Concept (Device A)
 - Demonstrate a mapper‑like tokenization (word count idea):
-  ```python
-  # Mapper-like emission: (token, 1)
-  for line in dfA['Message']:
-      line = line.strip()  # Remove leading/trailing whitespaces from the line
-      words = line.split()  # Split the line into words based on whitespace
-      for word in words:  # Iterate over each word in the line
-         # Print the word followed by a space and '1'
-          print(word, "1")
-   ```
+
+ ```python
+ # Mapper-like emission: (token, 1) for each word in each log message
+for line in dfA['Message']:
+    if pd.isna(line):
+        continue  # skip missing messages
+    text = str(line).strip()              # remove leading/trailing whitespace
+    words = text.split()                  # split on whitespace
+    for word in words:
+        print(word, "1")
+ ```
 
 - Now count exact IOC tokens (Device A):
 
-  ```python
-    count_tokens_A = 0
-    for line in dfA['Message']:
-        for word in str(line).split():
-            if word == iocA:
-                count_tokens_A += 1
-    print(f"Total occurrences of {iocA}: {count_tokens_A}")
+ ```python
+# Count exact IOC tokens (standalone matches)
+iocA = '200.30.175.162'
 
-    ```
+count_tokens_A = 0
+for line in dfA['Message']:
+    if pd.isna(line):
+        continue  # skip missing messages
+    for word in str(line).split():
+        if word == iocA:
+            count_tokens_A += 1
+
+print(f"Total occurrences of {iocA}: {count_tokens_A}")
+ ```
 
 - Answer in Markdown:
   - Explain how this mimics a MapReduce mapper.
@@ -171,7 +178,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 
 ----
 
-## Part B — IOC Filtering (Pivoting) Device B
+## Part B — IOC Filtering (Pivoting) on  Device B
 Now that you’ve completed Tasks 1–5 for Device A, you will repeat the same IOC‑driven log analysis on a second host: Device B (deviceB_ssh_logs.csv)
 The goal of this part is to help you practice pivoting on a new IOC, adapting your code, and comparing patterns across multiple systems, exactly what a SOC analyst does when checking if an attack is isolated or part of a broader campaign.
 
