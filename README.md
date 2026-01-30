@@ -166,3 +166,14 @@ Now you want to do the same analysis for another log file provided `otherdevice.
   - Results for IOC and failure filtering on Device B
   - Brief explanation of what you changed in code
   - One meaningful difference between Devices A and B
+
+----
+
+## Video Requirements
+
+- Max length: 2 minutes (absolute max 3 minutes; over 3 minutes = 0 marks for the lab)
+- Screen share showing your notebook
+- Voice narration required along with camera on
+- One continuous video capture (no editing)
+- Submit as: Unlisted YouTube link
+- Paste your video link: in the Blackboard Lab 5 submission
