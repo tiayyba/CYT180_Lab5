@@ -113,9 +113,12 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   ```python
   # Mapper-like emission: (token, 1)
   for line in dfA['Message']:
-    for word in str(line).split():
-        print(word, 1)
-  ```
+    line = line.strip()  # Remove leading/trailing whitespaces from the line
+    words = line.split()  # Split the line into words based on whitespace
+    for word in words:  # Iterate over each word in the line
+        # Print the word followed by a space and '1'
+        print(word, "1")
+   ```
 
 - Now count exact IOC tokens (Device A):
     ```python
@@ -125,6 +128,8 @@ Create a new notebook in Google Colab and copy the code step by step, understand
         if word == iocA:
             count_tokens_A += 1
     count_tokens_A
+    print(f"Total occurrences of {iocA}: {count_tokens_A}")
+
     ```
 
 - Answer in Markdown:
