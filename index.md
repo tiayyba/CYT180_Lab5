@@ -87,7 +87,7 @@ Examples you’ll see:
   - Invalid user admin from 220.30.175.162,
   - Failed password for invalid user slasher from 220.30.175.162
 
-**Note**: You may see an IPv6 address (e.g., fe80::1) and one line where the IOC is followed by a comma—your filters should handle these edge cases.
+**Note**: You may see an IPv6 address (e.g., fe80::1). You do not need special code for IPv6 — just ignore those lines. There is one line where the IOC is followed by a comma—your filters should handle this edge cases.
 
 ----
 
@@ -200,7 +200,7 @@ print(f"Total occurrences of {iocA}: {count_tokens_A}")
 ----
 
 ## Part B — IOC Filtering (Pivoting) on Device B
-Now that you’ve completed setps 1–5 for Device A, you will repeat the same IOC‑driven log analysis on a second host: Device B (deviceB_ssh_logs.csv).
+Now that you’ve completed **steps 1–5** for **Device A**, you will repeat the same IOC‑driven log analysis on a second host: Device B (deviceB_ssh_logs.csv).
 Device B uses the same 5-column format as Device A (Timestamp, Host, Process, ProcessID, Message).<br>
 The goal of this part is to help you practice pivoting on a new IOC, adapting your code, and comparing patterns across multiple systems, exactly what a SOC analyst does when checking if an attack is isolated or part of a broader campaign.
 
@@ -226,7 +226,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
 - **Checkpoint A — Device A Data Loading (≤ 30 seconds)**
   - Demonstrate loading deviceA_ssh_logs.csv
   - The total number of rows
-  - A brief verbal explanation of the dataset structure. (Example: “Here is Device A’s log file. It contains X rows and the columns ProcessID and Message.”)
+  - A brief verbal explanation of the dataset structure. (Example: “Here is Device A’s log file. “It contains X rows and the columns Timestamp, Host, Process, ProcessID, and Message.”)
 - **Checkpoint B — IOC Filtering + Failure Filtering (≤ 60 seconds)**
   - Show the IOC filter results for Device A
   - Invalid/Failed filter results for Device A
