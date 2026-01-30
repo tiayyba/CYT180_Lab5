@@ -33,16 +33,44 @@ By the end of Lab 5, you will be able to:
 ----
 
 ## Background: Indicators of Compromise (IOCs)
-- **Definition:** An IOC is a data artifact associated with malicious activity, e.g., suspicious IPs/domains, known malware hashes, or anomalous authentication patterns. In SSH logs, repeated Invalid/Failed attempts from a single source IP often suggest password spraying, credential stuffing, or brute force.
-- **IOC pivot:**  After an IOC is identified, analysts pivot: they filter all logs for events involving that IOC, measure scope (how often/where it appears), and decide whether to escalate.
-- In these datasets:
 
-  - 200.30.175.162 (Device A) in task_2_logs.csv
-  - 220.30.175.162 (Device B) in otherdevice.csv
-An IOC is simply a clue that something suspicious might be happening.
-Examples include an unusual IP address trying to log in repeatedly, a strange file name, or a domain known to host malware.
-Analysts use these clues to narrow down thousands of log entries and focus only on activity related to the threat.
+In cybersecurity, an Indicator of Compromise (IOC) is simply a clue that something suspicious or malicious may be happening on a system. An IOC is a specific piece of data that stands out during an investigation—something that doesn’t typically appear in normal system activity.
+Common IOC types include:
+- A suspicious IP address repeatedly trying to log in
+- A filename, hash, or registry value associated with known malware
+- An unusual domain or URL contacting a server at odd hours
+
+**Why IOCs matter**
+Logs often contain thousands or millions of entries. An IOC gives analysts a starting point:
+```yml
+“I found this suspicious thing… now show me everything else related to it.”
+```
+This process is called pivoting.
+
+**IOC Pivoting:**
+Pivoting means filtering and reorganizing logs around the suspicious item. It’s like clicking a person’s username on social media to see all their posts.
+You take one clue and explore every event connected to it.
+In this lab, the IOC is a source IP address sending repeated failed login attempts to an SSH server. This is significant because legitimate users almost never generate dozens of login failures across many usernames.
+
+**Why these IPs matter in this dataset:**
+You will pivot on these two IOCs:
+- 200.30.175.162 (Device A)
+- 220.30.175.162 (Device B)
+These IP addresses are repeatedly associated with:
+- Invalid user ...
+- Failed password ...
+Such patterns are common in SSH brute‑force or password‑spray attacks.
+
+**Cross‑Host IOC Correlation:**
+Attackers often use the **same source IP** against many systems.
+This is why analysts check:
+- Does the IOC appear on multiple devices?
+- Is the behavior similar across hosts?
+
+If the same IP is attempting many invalid logins on multiple machines, it may indicate a broader campaign rather than an isolated issue.
+
 ----
+
 
 ## Dataset Walkthrough
 Each CSV includes:
@@ -52,12 +80,11 @@ Each CSV includes:
 Examples you’ll see:
 
 - Device A contains lines like:
-  - Invalid user admin from 200.30.175.162,
+  - Invalid user admin from 200.30.175.162, (This is the IOC (source IP))
   - Failed password for invalid user fluffy from 200.30.175.162 … `task_2_logs.csv`
 - Device B contains lines like:
   - Invalid user admin from 220.30.175.162,
   - Failed password for invalid user slasher from 220.30.175.162
-
 ----
 
 ## Instructions
