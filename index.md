@@ -101,12 +101,10 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   dfA = pd.read_csv('deviceA_ssh_logs.csv')
   dfA['Message'] = dfA['Message'].astype(str).fillna('').str.strip()
   dfA['Process'] = dfA['Process'].astype(str).str.strip()
-
-#Quick inspection
+  #Quick inspection
   display(dfA.head())
   dfA.info()
   print("Total rows:", len(dfA))
-
   ```
 - In the markdown cell, write 1–2 sentences describing the structure of data and any quirks (e.g., extra spaces).
   
