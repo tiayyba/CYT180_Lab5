@@ -6,7 +6,8 @@
 ----
 
 ## Introduction
-In this lab you’ll perform IOC‑driven SSH log analysis using pandas and connect your workflow to the MapReduce mapper concept. You will:
+In this lab you’ll perform IOC‑driven SSH log analysis using pandas and connect your workflow to the MapReduce mapper concept.
+You will:
 - Ingest and filter SSH authentication logs
 - Pivot on an indicator of compromise (IOC)
 - Count IOC occurrences (pandas and mapper‑style)
