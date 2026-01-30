@@ -75,33 +75,37 @@ You are provided with two data files.
 - deviceA_ssh_logs.csv
 - deviceB_ssh_logs.csv
 
-Each CSV includes:
-- ProcessID (e.g., sshd[9370])
-- Message (the authentication log line)
+Each CSV includes: **Timestamp**, **Host**, **Process**, **ProcessID**, **Message** (we’ll primarily use Process and Message)
 
 Examples you’ll see:
 
 - Device A contains lines like:
   - Invalid user admin from 200.30.175.162 — this is the IOC (source IP)
   - Failed password for invalid user fluffy from 200.30.175.162 …
+  - Received disconnect from 200.30.175.162 port 58210:11: Bye  (no ‘Invalid/Failed’, still relevant to the IOC).
 - Device B contains lines like:
   - Invalid user admin from 220.30.175.162,
   - Failed password for invalid user slasher from 220.30.175.162
+
+**Note**: You may see an IPv6 address (e.g., fe80::1) and one line where the IOC is followed by a comma—your filters should handle these edge cases.
+
 ----
 
 ## Part A — IOC‑Driven Analysis on Device A (deviceA_ssh_logs.csv)
 Create a new notebook in Google Colab and copy the code step by step, understand the code and inspect the output at each step.
 
 ### Step 1 — Load and Inspect the Data
-- Import pandas and load only **Device A**:
+- In this step you’ll load Device A and do a minimal cleanup so later filters (process, IOC, and failure keywords) work reliably.
   ```python
   import pandas as pd
-
   dfA = pd.read_csv('deviceA_ssh_logs.csv')
-  # Quick inspection
-  dfA.head()
+  dfA['Message'] = dfA['Message'].astype(str).fillna('').str.strip()
+  dfA['Process'] = dfA['Process'].astype(str).str.strip()
+
+#Quick inspection
+  display(dfA.head())
   dfA.info()
-  len(dfA)
+  print("Total rows:", len(dfA))
 
   ```
 - In the markdown cell, write 1–2 sentences describing the structure of data and any quirks (e.g., extra spaces).
