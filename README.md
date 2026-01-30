@@ -85,15 +85,27 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   - How many SSH log lines exist per device?
   - Why is filtering by process valuable for triage?
 
-### Task 3 — IOC-Based Suspicious Activity (Device A)
-- Set IOC for Device A: 200.30.175.162.
+### Task 3 — IOC Pivot (Device A) 
+- Use the suspected IOC for **Device A: 200.30.175.162**
 - Filter messages containing the IOC and count occurrences:
   ```python
-  ipA = sshA[sshA['Message'].astype(str).str.contains('200.30.175.162', na=False)]
-  countA = len(ipA)
-  countA
+  iocA = '200.30.175.162'
+  ipA  = sshA[sshA['Message'].astype(str).str.contains(iocA, na=False)]
+  len(ipA)
+  ipA.head() 
   ```
-- Write 2–3 sentences: Is this sufficient evidence of malicious activity? Why or why not?
-(Consider that repeated Invalid/Failed attempts are strong signals.)
+- In the Markdown, write 2–3 sentences: is this sufficient evidence of malicious activity? Why or why not?
 
-Context: The sample Device A lines include repeated Invalid/Failed attempts tied to 200.30.175.162. [task_2_logs | Excel]
+### Task 4 — Failed/Invalid Attempts (Device A)
+- Search for common failure indicators:
+  ```python
+  keywords = ['Invalid', 'Failed']
+  pattern  = '|'.join(keywords)
+
+  failA = ipA[ipA['Message'].astype(str).str.contains(pattern, na=False)]
+  len(failA)
+  failA
+```
+- Answer in Markdown:
+  - How many suspicious authentication failures are present for Device A?
+  - What patterns do you notice (usernames, ports, repetition)?
