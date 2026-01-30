@@ -109,13 +109,18 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   dfA.info()
   print("Total rows:", len(dfA))
   ```
-- In the markdown cell, write 1–2 sentences describing the structure of data and any quirks (e.g., extra spaces).
+- In the markdown cell, write 1–2 sentences describing the structure of data.
   
 ### Step 2 — Filter for SSH Authentication Events
+- Scope the dataset to only **sshd** events so the later IOC and failure filters operate on relevant rows and ignore benign cron/systemd/kernel noise present in the data file.
 - Although these files are already SSH-related, write generic filters (so your code is reusable):
   ```python
-  sshA = dfA[dfA['ProcessID'].astype(str).str.contains('sshd', na=False)]
-  len(sshA)
+  # Scope to SSH daemon lines using the Process column
+  sshA = dfA[dfA['Process'].eq('sshd')].copy()
+
+  # Quick checks
+  print("Total sshd rows (Device A):", len(sshA))
+  display(sshA.head())
   ```
 - Answer in Markdown
   - How many SSH log lines exist?
