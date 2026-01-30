@@ -117,7 +117,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
         print(word, 1)
   ```
 
-  - Now count exact IOC tokens (Device A):
+- Now count exact IOC tokens (Device A):
     ```python
     count_tokens_A = 0
     for line in dfA['Message']:
