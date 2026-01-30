@@ -104,8 +104,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   failA = ipA[ipA['Message'].astype(str).str.contains(pattern, na=False)]
   len(failA)
   failA
-```
-
+  ```
 - Answer in Markdown:
   - How many suspicious authentication failures are present for Device A?
   - What patterns do you notice (usernames, ports, repetition)?
