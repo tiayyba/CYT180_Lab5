@@ -78,12 +78,12 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 - Although these files are already SSH-related, write generic filters (so your code is reusable):
   ```python
   import pandas as pd
-
   sshA = dfA[dfA['ProcessID'].astype(str).str.contains('sshd', na=False)]
-  sshB = dfB[dfB['ProcessID'].astype(str).str.contains('sshd', na=False)]
+  len(sshA)
   ```
-- How many SSH log lines exist per device?
-- Why is filtering by process valuable for triage?
+- Answer in Markdown
+  - How many SSH log lines exist per device?
+  - Why is filtering by process valuable for triage?
 
 ### Task 3 — IOC-Based Suspicious Activity (Device A)
 - Set IOC for Device A: 200.30.175.162.
