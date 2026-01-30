@@ -87,9 +87,10 @@ Examples you’ll see:
   - Failed password for invalid user slasher from 220.30.175.162
 ----
 
-## Instructions
+## Part A — IOC‑Driven Analysis on Device A (deviceA_ssh_logs.csv)
 Create a new notebook in Google Colab and copy the code step by step, understand the code and inspect the output at each step.
-### Task 1 — Load and Inspect the Data
+
+### Step 1 — Load and Inspect the Data
 - Import pandas and load only **Device A**:
   ```python
   import pandas as pd
@@ -103,7 +104,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   ```
 - In the markdown cell, write 1–2 sentences describing the structure of data and any quirks (e.g., extra spaces).
   
-### Task 2 — Filter for SSH Authentication Events
+### Step 2 — Filter for SSH Authentication Events
 - Although these files are already SSH-related, write generic filters (so your code is reusable):
   ```python
   sshA = dfA[dfA['ProcessID'].astype(str).str.contains('sshd', na=False)]
@@ -113,7 +114,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   - How many SSH log lines exist per device?
   - Why is filtering by process valuable for triage?
 
-### Task 3 — IOC Pivot (Device A) 
+### Step 3 — IOC Pivot (Device A) 
 - Use the suspected IOC for **Device A: 200.30.175.162**
 - Filter messages containing the IOC and count occurrences:
   ```python
@@ -124,7 +125,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   ```
 - In the Markdown, write 2–3 sentences: is this sufficient evidence of malicious activity? Why or why not?
 
-### Task 4 — Failed/Invalid Attempts (Device A)
+### Step 4 — Failed/Invalid Attempts (Device A)
 - Search for common failure indicators:
   ```python
   keywords = ['Invalid', 'Failed']
@@ -137,7 +138,8 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 - Answer in Markdown:
   - How many suspicious authentication failures are present for Device A?
   - What patterns do you notice (usernames, ports, repetition)?
-### Task 5 — Mapper Concept (Device A)
+    
+### Step 5 — Mapper Concept (Device A)
 - Demonstrate a mapper‑like tokenization (word count idea):
   ```python
   # Mapper-like emission: (token, 1)
@@ -165,42 +167,53 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   - Why is distributed counting valuable at scale (billions of log lines)?
 
 ----
-## Task 2B — Step 2: Student‑Driven Analysis of Device B (Do this AFTER Tasks 1–5)
-Now you want to do the same analysis for another log file provided `otherdevice.csv`. But before you run the script you need to make some adjustments:
-- Load Device B:
-- Adjust your code for Device B (add comments describing what changed and why) and run the code.
-- **Cross‑Host Comparison & SOC Summary**
+
+## Part B — IOC‑Driven Analysis on Device B (deviceB_ssh_logs.csv)
+Now that you’ve completed Tasks 1–5 for Device A, you will repeat the same IOC‑driven log analysis on a second host: Device B.
+The goal of this part is to help you practice pivoting on a new IOC, adapting your code, and comparing patterns across multiple systems, exactly what a SOC analyst does when checking if an attack is isolated or part of a broader campaign.
+
+This section is intentionally less guided: your task is to take what you built in Part A and apply it independently to a second host.
+
+Using the workflow you created for Device A, independently perform the same full analysis on Device B. Your job is to adapt your own code from Part A to this new dataset, including updating the IOC, adjusting any file‑specific logic, and ensuring that your Device A and Device B results remain separate.
+
+Once your analysis is complete, compare your findings from both devices. Discuss differences in IOC activity, authentication failures, username patterns, and any indications of scanning or brute‑force behavior across hosts. Conclude with a short SOC‑style analytic summary describing what occurred on each system, the evidence that supports your conclusions, and recommended next steps for incident response.
+
+**Cross‑Host Comparison & SOC Summary**
   - Compare Device A vs Device B (IOC frequency, failure counts, notable differences).
-  - Write a 5–8 sentence SOC‑style summary that answers:
+  - Write a 5–8 sentence SOC‑style summary in markdown that answers:
     - What happened?
     - What evidence supports your conclusion?
     - Does this look like a brute‑force/scanning campaign?
+    - Whether both devices show similar or coordinated activity
     - What next steps would you recommend (e.g., blocking, MFA enforcement, log retention, alerting thresholds)?
 
 ----
 
 ## Submission Instructions
-- Record a 2-minute video where you show your notebook and explain your analysis verbally.
+- Record a 2-minute 30 seconds video where you show your notebook and explain your analysis verbally.
 - The video must include these three checkpoints in order:
 - **Checkpoint A — Device A Data Loading (≤ 30 seconds)**
-  - Show:
-  - dfA.head()
-  - Total row count
-  - 2-3 sentence explanation of structure (Example: “Here is Device A’s log file. It contains X rows and the columns ProcessID and Message.”)
+  - Demonstrate loading deviceA_ssh_logs.csv
+  - The total number of rows
+  - A brief verbal explanation of the dataset structure. (Example: “Here is Device A’s log file. It contains X rows and the columns ProcessID and Message.”)
 - **Checkpoint B — IOC & Authentication Failure Filtering (≤ 60 seconds)**
-  - IOC filter results for Device A
+  - Show the IOC filter results for Device A
   - Invalid/Failed filter results for Device A
-  - Brief explanation of the counts
+  - A short verbal interpretation of the counts and what they suggest. (Example: “This IP appears repeatedly with Failed and Invalid login attempts, which is suspicious.”)
 - **Checkpoint C — Device B Adjustments & Comparison (≤ 30 seconds)**
   - Results for IOC and failure filtering on Device B
   - Brief explanation of what you changed in code
   - One meaningful difference between Devices A and B
-
+- **Checkpoint D — Cross‑Host Comparison & SOC Summary (≤ seconds)**
+  - Speak a short, verbal SOC summary that includes:
+    - One clear difference between Device A and Device B
+    - Whether the behavior looks like brute‑force or scanning
+    - Whether both devices show similar or coordinated activity
 ----
 
 ## Video Requirements
 
-- Max length: 2 minutes (absolute max 3 minutes; over 3 minutes = 0 marks for the lab)
+- Max length: 2 minutes 30 seconds (absolute max 3 minutes; over 3 minutes = 0 marks for the lab)
 - Screen share showing your notebook
 - Voice narration required along with camera on
 - One continuous video capture (no editing)
