@@ -1,7 +1,7 @@
 # CYT180 — Lab 5: Log Analysis with Pandas, IOCs, and the Mapper Concept
 **Weight:** 3% <br>
 **Work Type:** Individual <br>
-**Submission Format:** 2-3 minutes video, see submission instructions.
+**Submission Format:** 2 minutes 30 seconds video, see submission instructions.
 
 ----
 
@@ -82,7 +82,7 @@ Each CSV includes:
 Examples you’ll see:
 
 - Device A contains lines like:
-  - Invalid user admin from 200.30.175.162, (This is the IOC (source IP))
+  - Invalid user admin from 200.30.175.162 — this is the IOC (source IP)
   - Failed password for invalid user fluffy from 200.30.175.162 …
 - Device B contains lines like:
   - Invalid user admin from 220.30.175.162,
@@ -143,9 +143,8 @@ Create a new notebook in Google Colab and copy the code step by step, understand
     
 ### Step 5 — Mapper Concept (Device A)
 - Demonstrate a mapper‑like tokenization (word count idea):
-
- ```python
- # Mapper-like emission: (token, 1) for each word in each log message
+```python
+ #Mapper-like emission: (token, 1) for each word in each log message
 for line in dfA['Message']:
     if pd.isna(line):
         continue  # skip missing messages
@@ -178,7 +177,7 @@ print(f"Total occurrences of {iocA}: {count_tokens_A}")
 
 ----
 
-## Part B — IOC Filtering (Pivoting) on  Device B
+## Part B — IOC Filtering (Pivoting) on Device B
 Now that you’ve completed Tasks 1–5 for Device A, you will repeat the same IOC‑driven log analysis on a second host: Device B (deviceB_ssh_logs.csv)
 The goal of this part is to help you practice pivoting on a new IOC, adapting your code, and comparing patterns across multiple systems, exactly what a SOC analyst does when checking if an attack is isolated or part of a broader campaign.
 
@@ -190,13 +189,12 @@ Once your analysis is complete, compare your findings from both devices. Discuss
 
 **Cross‑Host Comparison & SOC Summary**
   - Compare Device A vs Device B (IOC frequency, failure counts, notable differences).
-  - Include in your video a 5–8 sentence SOC‑style summary in markdown that answers:
-    - What happened?
+  - Prepare to explain the following in your video:
+    - What happened on each device?
     - What evidence supports your conclusion?
-    - Does this look like a brute‑force/scanning campaign?
-    - Whether both devices show similar or coordinated activity
-    - What next steps would you recommend (e.g., blocking, MFA enforcement, log retention, alerting thresholds)?
-
+    - Does the activity resemble brute‑force or scanning?
+    - Do both devices show **similar** or coordinated behavior?
+    - What next steps would you recommend (e.g., blocking the IP, enabling MFA, adjusting alert thresholds, improving log retention)?
 ----
 
 ## Submission Instructions
@@ -213,7 +211,6 @@ Once your analysis is complete, compare your findings from both devices. Discuss
 - **Checkpoint C — Device B Adjustments & Comparison (≤ 30 seconds)**
   - Results for IOC and failure filtering on Device B
   - Brief explanation of what you changed in code
-  - One meaningful difference between Devices A and B
 - **Checkpoint D — Cross‑Host Comparison & SOC Summary (≤ 30 seconds)**
   - Speak a short, verbal SOC summary that includes:
     - One clear difference between Device A and Device B
