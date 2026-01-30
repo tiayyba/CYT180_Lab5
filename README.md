@@ -53,7 +53,9 @@ In this lab, the IOC is a source IP address sending repeated failed login attemp
 You will pivot on these two IOCs:
 - 200.30.175.162 (Device A)
 - 220.30.175.162 (Device B)
+
 These IP addresses are repeatedly associated with:
+
 - Invalid user ...
 - Failed password ...
 Such patterns are common in SSH brute‑force or password‑spray attacks.
