@@ -15,8 +15,8 @@ You will:
 - Write a short SOC‑style analytic summary
 
 The sample data features SSH daemon (sshd) messages with `Invalid user …` and `Failed password …` tied to a specific source IP per device.<br>
-  - Device A shows attempts from 200.30.175.162 (task_2_logs.csv)
-  - Device B shows attempts from 220.30.175.162 (otherdevice.csv) <br>
+  - Device A shows attempts from 200.30.175.162 (deviceA_ssh_logs.csv)
+  - Device B shows attempts from 220.30.175.162 (deviceB_ssh_logs.csv) <br>
 
 ----
 
@@ -81,7 +81,7 @@ Examples you’ll see:
 
 - Device A contains lines like:
   - Invalid user admin from 200.30.175.162, (This is the IOC (source IP))
-  - Failed password for invalid user fluffy from 200.30.175.162 … `task_2_logs.csv`
+  - Failed password for invalid user fluffy from 200.30.175.162 … `deviceA_ssh_logs.csv`
 - Device B contains lines like:
   - Invalid user admin from 220.30.175.162,
   - Failed password for invalid user slasher from 220.30.175.162
@@ -95,7 +95,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   ```python
   import pandas as pd
 
-  dfA = pd.read_csv('task_2_logs.csv')
+  dfA = pd.read_csv('deviceA_ssh_logs.csv')
   # Quick inspection
   dfA.head()
   dfA.info()
