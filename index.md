@@ -96,9 +96,12 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 
 ### Step 1 — Load and Inspect the Data
 - In this step you’ll load Device A and do a minimal cleanup so later filters (process, IOC, and failure keywords) work reliably.
+- The file has five columns: Timestamp, Host, Process, ProcessID, Message
+- We’ll mainly use Process (to scope to sshd) and Message (to search keywords and IOCs).
   ```python
   import pandas as pd
   dfA = pd.read_csv('deviceA_ssh_logs.csv')
+  #We normalized strings because a few messages are blank/NULL or have extra spaces—this keeps later filters consistent
   dfA['Message'] = dfA['Message'].astype(str).fillna('').str.strip()
   dfA['Process'] = dfA['Process'].astype(str).str.strip()
   #Quick inspection
