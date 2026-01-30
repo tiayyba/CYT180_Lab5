@@ -145,19 +145,26 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 ### Step 4 — Failed/Invalid Attempts (Device A)
 - Search for common failure indicators:
   ```python
-  keywords = ['Invalid', 'Failed']
-  pattern  = '|'.join(keywords)
+  # Case-insensitive search for failure indicators
+  failA = ipA[
+    ipA['Message_norm'].str.lower().str.contains('invalid user') |
+    ipA['Message_norm'].str.lower().str.contains('failed password')
+  ].copy()
 
-  failA = ipA[ipA['Message'].astype(str).str.contains(pattern, na=False)]
-  len(failA)
-  failA
+  print("Suspicious failed/invalid attempts (Device A):", len(failA))
+  display(failA)
+
   ```
 - Answer in Markdown:
   - How many suspicious authentication failures are present for Device A?
   - What patterns do you notice (usernames, ports, repetition)?
     
 ### Step 5 — Mapper Concept (Device A)
-- Demonstrate a mapper‑like tokenization (word count idea):
+
+- Show how a MapReduce mapper would:
+  - emit (token, 1) for each word, and
+  - count exact IOC tokens.
+
 ```python
  #Mapper-like emission: (token, 1) for each word in each log message
 for line in dfA['Message']:
@@ -193,7 +200,8 @@ print(f"Total occurrences of {iocA}: {count_tokens_A}")
 ----
 
 ## Part B — IOC Filtering (Pivoting) on Device B
-Now that you’ve completed Tasks 1–5 for Device A, you will repeat the same IOC‑driven log analysis on a second host: Device B (deviceB_ssh_logs.csv)
+Now that you’ve completed setps 1–5 for Device A, you will repeat the same IOC‑driven log analysis on a second host: Device B (deviceB_ssh_logs.csv).
+Device B uses the same 5-column format as Device A (Timestamp, Host, Process, ProcessID, Message).<br>
 The goal of this part is to help you practice pivoting on a new IOC, adapting your code, and comparing patterns across multiple systems, exactly what a SOC analyst does when checking if an attack is isolated or part of a broader campaign.
 
 This section is intentionally less guided: your task is to take what you built in Part A and apply it independently to a second host.
