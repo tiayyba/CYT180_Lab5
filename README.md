@@ -17,8 +17,6 @@ You will:
 The sample data features SSH daemon (sshd) messages with `Invalid user …` and `Failed password …` tied to a specific source IP per device.<br>
   - Device A shows attempts from 200.30.175.162 (task_2_logs.csv)
   - Device B shows attempts from 220.30.175.162 (otherdevice.csv) <br>
-You will verify this through your analysis.
-
 
 ----
 
@@ -63,17 +61,19 @@ Examples you’ll see:
 ## Instructions
 Create a new notebook in Google Colab and copy the code step by step, understand the code and inspect the output at each step.
 ### Task 1 — Load and Inspect the Data
-- Import pandas and load the two CSVs:
+- Import pandas and load only **Device A**:
   ```python
   import pandas as pd
 
   dfA = pd.read_csv('task_2_logs.csv')
-  dfB = pd.read_csv('otherdevice.csv')
+  # Quick inspection
+  dfA.head()
+  dfA.info()
+  len(dfA)
 
   ```
-- Show the first 5 rows (head()), column names, and total row counts for each DataFrame.
 - In the markdown cell, write 1–2 sentences describing the structure of data and any quirks (e.g., extra spaces).
-
+  
 ### Task 2 — Filter for SSH Authentication Events
 - Although these files are already SSH-related, write generic filters (so your code is reusable):
   ```python
