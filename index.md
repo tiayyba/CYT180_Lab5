@@ -156,7 +156,8 @@ Create a new notebook in Google Colab and copy the code step by step, understand
    ```
 
 - Now count exact IOC tokens (Device A):
-    ```python
+
+  ```python
     count_tokens_A = 0
     for line in dfA['Message']:
         for word in str(line).split():
@@ -195,7 +196,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
 
 ## Submission Instructions
 - Record a 2-minute 30 seconds video where you show your notebook and explain your analysis verbally.
-- The video must include these three checkpoints in order:
+- The video must include these four checkpoints in order:
 - **Checkpoint A — Device A Data Loading (≤ 30 seconds)**
   - Demonstrate loading deviceA_ssh_logs.csv
   - The total number of rows
@@ -208,7 +209,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
   - Results for IOC and failure filtering on Device B
   - Brief explanation of what you changed in code
   - One meaningful difference between Devices A and B
-- **Checkpoint D — Cross‑Host Comparison & SOC Summary (≤ seconds)**
+- **Checkpoint D — Cross‑Host Comparison & SOC Summary (≤ 30 seconds)**
   - Speak a short, verbal SOC summary that includes:
     - One clear difference between Device A and Device B
     - Whether the behavior looks like brute‑force or scanning
