@@ -40,8 +40,7 @@ Common IOC types include:
 - A filename, hash, or registry value associated with known malware
 - An unusual domain or URL contacting a server at odd hours
 
-**Why IOCs matter**
-Logs often contain thousands or millions of entries. An IOC gives analysts a starting point:
+**Why IOCs matter:** Logs often contain thousands or millions of entries. An IOC gives analysts a starting point:
 ```yml
 “I found this suspicious thing… now show me everything else related to it.”
 ```
