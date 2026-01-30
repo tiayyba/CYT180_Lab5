@@ -131,8 +131,8 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   ```python
   iocA = '200.30.175.162'
   # Minimal cleaning for the trailing-comma edge case
-  sshA['Message_norm'] = sshA['Message'].str.replace(',', ' ', regex=False).str.strip()
-  
+  sshA['Message_norm'] = sshA['Message'].str.replace(',', ' ').str.strip()  
+
   #Plain substring search
   ipA = sshA[sshA['Message_norm'].str.contains(iocA, na=False)].copy()
 
