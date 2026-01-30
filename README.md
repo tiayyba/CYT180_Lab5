@@ -134,3 +134,20 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 - Answer in Markdown:
   - Explain how this mimics a MapReduce mapper.
   - Why is distributed counting valuable at scale (billions of log lines)?
+
+----
+## Task 2B — Step 2: Student‑Driven Analysis of Device B (Do this AFTER Tasks 1–5)
+Now you want to do the same analysis for another log file provided `otherdevice.csv`. But before you run the script you need to make some adjustments:
+- Load Device B:
+- Adjust your code for Device B (add comments describing what changed and why) and run the code.
+- Cross‑Host Comparison & SOC Summary
+  - Compare Device A vs Device B (IOC frequency, failure counts, notable differences).
+  - Write a 5–8 sentence SOC‑style summary that answers:
+    - What happened?
+    - What evidence supports your conclusion?
+    - Does this look like a brute‑force/scanning campaign?
+    - What next steps would you recommend (e.g., blocking, MFA enforcement, log retention, alerting thresholds)?
+
+----
+
+## Submission Instructions
