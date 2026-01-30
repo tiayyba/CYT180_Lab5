@@ -15,8 +15,8 @@ You will:
 - Write a short SOC‑style analytic summary
 
 The sample data features SSH daemon (sshd) messages with `Invalid user …` and `Failed password …` tied to a specific source IP per device.
-- Device A shows attempts from 200.30.175.162 (task_2_logs.csv)
-- Device B shows attempts from 220.30.175.162 (otherdevice.csv) <br>
+  - Device A shows attempts from 200.30.175.162 (task_2_logs.csv)
+  - Device B shows attempts from 220.30.175.162 (otherdevice.csv) <br>
 You will verify this through your analysis.
 
 ----
