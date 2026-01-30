@@ -140,7 +140,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 Now you want to do the same analysis for another log file provided `otherdevice.csv`. But before you run the script you need to make some adjustments:
 - Load Device B:
 - Adjust your code for Device B (add comments describing what changed and why) and run the code.
-- Cross‑Host Comparison & SOC Summary
+- **Cross‑Host Comparison & SOC Summary**
   - Compare Device A vs Device B (IOC frequency, failure counts, notable differences).
   - Write a 5–8 sentence SOC‑style summary that answers:
     - What happened?
@@ -151,3 +151,18 @@ Now you want to do the same analysis for another log file provided `otherdevice.
 ----
 
 ## Submission Instructions
+- Record a 2-minute video where you show your notebook and explain your analysis verbally.
+- The video must include these three checkpoints in order:
+- **Checkpoint A — Device A Data Loading (≤ 30 seconds)**
+  - Show:
+  - dfA.head()
+  - Total row count
+  - 2-3 sentence explanation of structure (Example: “Here is Device A’s log file. It contains X rows and the columns ProcessID and Message.”)
+- **Checkpoint B — IOC & Authentication Failure Filtering (≤ 60 seconds)**
+  - IOC filter results for Device A
+  - Invalid/Failed filter results for Device A
+  - Brief explanation of the counts
+- **Checkpoint C — Device B Adjustments & Comparison (≤ 30 seconds)**
+  - Results for IOC and failure filtering on Device B
+  - Brief explanation of what you changed in code
+  - One meaningful difference between Devices A and B
