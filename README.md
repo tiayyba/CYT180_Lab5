@@ -108,3 +108,25 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 - Answer in Markdown:
   - How many suspicious authentication failures are present for Device A?
   - What patterns do you notice (usernames, ports, repetition)?
+### Task 5 — Mapper Concept (Device A)
+- Demonstrate a mapper‑like tokenization (word count idea):
+  ```python
+  # Mapper-like emission: (token, 1)
+  for line in dfA['Message']:
+    for word in str(line).split():
+        print(word, 1)
+  ```
+
+  - Now count exact IOC tokens (Device A):
+    ```python
+    count_tokens_A = 0
+    for line in dfA['Message']:
+      for word in str(line).split():
+        if word == iocA:
+            count_tokens_A += 1
+    count_tokens_A
+    ```
+
+- Answer in Markdown:
+  - Explain how this mimics a MapReduce mapper.
+  - Why is distributed counting valuable at scale (billions of log lines)?
