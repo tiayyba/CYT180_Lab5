@@ -41,9 +41,7 @@ Common IOC types include:
 - An unusual domain or URL contacting a server at odd hours
 
 **Why IOCs matter:** Logs often contain thousands or millions of entries. An IOC gives analysts a starting point:
-```yml
 “I found this suspicious thing... now show me everything else related to it.”
-```
 
 **IOC Pivoting:** Pivoting means filtering and reorganizing logs around the suspicious item. It’s like clicking a person’s username on social media to see all their posts.
 You take one clue and explore every event connected to it.
@@ -115,7 +113,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   len(sshA)
   ```
 - Answer in Markdown
-  - How many SSH log lines exist per device?
+  - How many SSH log lines exist?
   - Why is filtering by process valuable for triage?
 
 ### Step 3 — IOC Pivot (Device A) 
@@ -214,6 +212,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
     - One clear difference between Device A and Device B
     - Whether the behavior looks like brute‑force or scanning
     - Whether both devices show similar or coordinated activity
+      
 ----
 
 ## Video Requirements
