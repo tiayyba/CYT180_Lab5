@@ -183,7 +183,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
 
 **Cross‑Host Comparison & SOC Summary**
   - Compare Device A vs Device B (IOC frequency, failure counts, notable differences).
-  - Write a 5–8 sentence SOC‑style summary in markdown that answers:
+  - Include in your video a 5–8 sentence SOC‑style summary in markdown that answers:
     - What happened?
     - What evidence supports your conclusion?
     - Does this look like a brute‑force/scanning campaign?
@@ -212,6 +212,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
     - One clear difference between Device A and Device B
     - Whether the behavior looks like brute‑force or scanning
     - Whether both devices show similar or coordinated activity
+    - One recommended next step (e.g., blocking the IP, enabling MFA, adjusting alert thresholds)
       
 ----
 
