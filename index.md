@@ -220,6 +220,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
     - Does the activity resemble brute‑force or scanning?
     - Do both devices show **similar** or coordinated behavior?
     - What next steps would you recommend (e.g., blocking the IP, enabling MFA, adjusting alert thresholds, improving log retention)?
+      
 ----
 
 ## Submission Instructions
