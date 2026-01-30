@@ -116,7 +116,7 @@ Create a new notebook in Google Colab and copy the code step by step, understand
   - How many SSH log lines exist?
   - Why is filtering by process valuable for triage?
 
-### Step 3 — IOC Pivot (Device A) 
+### Step 3 — IOC Filtering (Pivoting) for Device A 
 - Use the suspected IOC for **Device A: 200.30.175.162**
 - Filter messages containing the IOC and count occurrences:
   ```python
@@ -171,8 +171,8 @@ Create a new notebook in Google Colab and copy the code step by step, understand
 
 ----
 
-## Part B — IOC‑Driven Analysis on Device B (deviceB_ssh_logs.csv)
-Now that you’ve completed Tasks 1–5 for Device A, you will repeat the same IOC‑driven log analysis on a second host: Device B.
+## Part B — IOC Filtering (Pivoting) Device B
+Now that you’ve completed Tasks 1–5 for Device A, you will repeat the same IOC‑driven log analysis on a second host: Device B (deviceB_ssh_logs.csv)
 The goal of this part is to help you practice pivoting on a new IOC, adapting your code, and comparing patterns across multiple systems, exactly what a SOC analyst does when checking if an attack is isolated or part of a broader campaign.
 
 This section is intentionally less guided: your task is to take what you built in Part A and apply it independently to a second host.
@@ -199,7 +199,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
   - Demonstrate loading deviceA_ssh_logs.csv
   - The total number of rows
   - A brief verbal explanation of the dataset structure. (Example: “Here is Device A’s log file. It contains X rows and the columns ProcessID and Message.”)
-- **Checkpoint B — IOC & Authentication Failure Filtering (≤ 60 seconds)**
+- **Checkpoint B — IOC Filtering + Failure Filtering (≤ 60 seconds)**
   - Show the IOC filter results for Device A
   - Invalid/Failed filter results for Device A
   - A short verbal interpretation of the counts and what they suggest. (Example: “This IP appears repeatedly with Failed and Invalid login attempts, which is suspicious.”)
