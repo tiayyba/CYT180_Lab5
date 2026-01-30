@@ -73,6 +73,10 @@ If the same IP is attempting many invalid logins on multiple machines, it may in
 
 
 ## Dataset Walkthrough
+You are provided with two data files.
+- deviceA_ssh_logs.csv
+- deviceB_ssh_logs.csv
+
 Each CSV includes:
 - ProcessID (e.g., sshd[9370])
 - Message (the authentication log line)
@@ -81,7 +85,7 @@ Examples you’ll see:
 
 - Device A contains lines like:
   - Invalid user admin from 200.30.175.162, (This is the IOC (source IP))
-  - Failed password for invalid user fluffy from 200.30.175.162 … `deviceA_ssh_logs.csv`
+  - Failed password for invalid user fluffy from 200.30.175.162 …
 - Device B contains lines like:
   - Invalid user admin from 220.30.175.162,
   - Failed password for invalid user slasher from 220.30.175.162
