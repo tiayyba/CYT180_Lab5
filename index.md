@@ -1,7 +1,7 @@
 # CYT180 — Lab 5: Log Analysis with Pandas, IOCs, and the Mapper Concept
 **Weight:** 3% <br>
 **Work Type:** Individual <br>
-**Submission Format:** 2 minutes 30 seconds video, see submission instructions.
+**Submission Format:** In-class demonstration 
 
 ----
 
@@ -224,33 +224,7 @@ Once your analysis is complete, compare your findings from both devices. Discuss
 ----
 
 ## Submission Instructions
-- Record a 2-minute 30 seconds video where you show your notebook and explain your analysis verbally.
-- The video must include these four checkpoints in order:
-- **Checkpoint A — Device A Data Loading (≤ 30 seconds)**
-  - Demonstrate loading deviceA_ssh_logs.csv
-  - The total number of rows
-  - A brief verbal explanation of the dataset structure. (Example: “Here is Device A’s log file. “It contains X rows and the columns Timestamp, Host, Process, ProcessID, and Message.”)
-- **Checkpoint B — IOC Filtering + Failure Filtering (≤ 60 seconds)**
-  - Show the IOC filter results for Device A
-  - Invalid/Failed filter results for Device A
-  - A short verbal interpretation of the counts and what they suggest. (Example: “This IP appears repeatedly with Failed and Invalid login attempts, which is suspicious.”)
-- **Checkpoint C — Device B Adjustments & Comparison (≤ 30 seconds)**
-  - Results for IOC and failure filtering on Device B
-  - Brief explanation of what you changed in code
-- **Checkpoint D — Cross‑Host Comparison & SOC Summary (≤ 30 seconds)**
-  - Speak a short, verbal SOC summary that includes:
-    - One clear difference between Device A and Device B
-    - Whether the behavior looks like brute‑force or scanning
-    - Whether both devices show similar or coordinated activity
-    - One recommended next step (e.g., blocking the IP, enabling MFA, adjusting alert thresholds)
-      
-----
+- This lab should not be submitted on BB.
+- You should complete the lab during the class and show it to the instructor.
+- You may be asked to answer some questions to demonstrate your understanding.
 
-## Video Requirements
-
-- Max length: 2 minutes 30 seconds (absolute max 3 minutes; over 3 minutes = 0 marks for the lab)
-- Screen share showing your notebook
-- Voice narration required along with camera on
-- One continuous video capture (no editing)
-- Submit as: Unlisted YouTube link
-- Paste your video link: in the Blackboard Lab 5 submission
