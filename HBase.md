@@ -50,13 +50,80 @@ Another important feature is versioning. HBase automatically stores multiple ver
 
 ---
 
-## Lab Setup Instructions
+# Setup Instructions: Cloudera VM and HBase Configuration
 
-Students must begin by installing Oracle VirtualBox and downloading the Cloudera QuickStart VM. The VirtualBox version of the VM should be imported using the "Import Appliance" option. While configuring the virtual machine, students should allocate at least 4 GB of RAM and 2 CPU cores, though higher configurations are recommended for performance.
+This section provides detailed, step-by-step instructions for installing Oracle VirtualBox, downloading and setting up the Cloudera QuickStart VM, and configuring HBase. Students must follow all steps carefully to ensure a working environment for the lab and classroom demonstration.
 
-Once the VM is launched, students can log in using the default credentials (`cloudera / cloudera`). After logging in, the Hadoop ecosystem services must be started either through Cloudera Manager or via terminal commands.
+---
 
-To begin working with HBase, students will open the HBase shell using:
+## Step 1: Install Oracle VirtualBox
 
-```bash
-hbase shell
+Begin by downloading Oracle VirtualBox from the official website:
+
+https://www.virtualbox.org/wiki/Downloads
+
+Select the appropriate version for your operating system (Windows, macOS, or Linux). Install the software using the default settings. During installation, network interfaces may briefly reset—this is normal.
+
+Once installed, launch VirtualBox to ensure it is working correctly.
+
+---
+
+## Step 2: Download Cloudera QuickStart VM
+
+Next, download the Cloudera QuickStart Virtual Machine. This VM contains Hadoop, HDFS, HBase, and other ecosystem tools pre-configured.
+
+Download from:
+
+https://www.cloudera.com/downloads/quickstart_vms.html
+
+Choose:
+- **Cloudera QuickStart VM for VirtualBox**
+
+The downloaded file will typically be in `.zip` or `.ova` format and may be large (several GB), so ensure a stable internet connection.
+
+After downloading:
+- If the file is zipped, extract it to obtain the `.ova` file.
+
+---
+
+## Step 3: Import VM into VirtualBox
+
+Open Oracle VirtualBox and import the downloaded appliance:
+
+1. Click **File → Import Appliance**
+2. Select the `.ova` file you downloaded
+3. Click **Next**
+
+Before importing, adjust the system settings:
+- RAM: Minimum **4 GB** (Recommended: 8 GB)
+- CPU: Minimum **2 cores**
+
+Click **Import** and wait for the process to complete.
+
+---
+
+## Step 4: Configure Virtual Machine Settings (Important)
+
+Before starting the VM, adjust the following:
+
+### System Settings
+- Go to **Settings → System**
+- Ensure:
+  - RAM is at least 4096 MB
+  - Processor cores are set to 2 or more
+
+### Display Settings
+- Go to **Settings → Display**
+- Set Video Memory to maximum (128 MB)
+
+### Network Settings (Optional but recommended)
+- Use **NAT** for basic connectivity
+- Use **Bridged Adapter** if network access is required externally
+
+---
+
+## Step 5: Start the Cloudera VM
+
+Click **Start** to boot the virtual machine.
+
+Once loaded, log in using:
