@@ -121,9 +121,7 @@ Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDF
 
 🔗 https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.13.0-0-virtualbox.zip
 
-After downloading:
-- Extract the `.zip` file.
-- After extraction, you will find a folder containing an **`.ovf` file** and a **`.vmdk` file** 
+After downloading, extract the `.zip` file. You will find a folder containing an **`.ovf` file** and a **`.vmdk` file** 
 
 ---
 
