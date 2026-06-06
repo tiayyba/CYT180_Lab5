@@ -1,8 +1,20 @@
-# Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
+# CYT180 – Lab 5 — Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
+**Weight:** 3% <br>
+**Work Type:** Individual <br>
+**Submission Format:** In class Demondtration: Students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts.
 
-> **Course Lab** | Big Data Systems  
-> Students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts.
+---
 
+## Lab Objectives 
+By the end of this lab, students will be able to:
+
+1. **Understand the limitations of HDFS** and explain why HBase was introduced as a complementary technology within the Hadoop ecosystem.
+2. **Install and configure** Oracle VirtualBox and the Cloudera QuickStart VM to create a functional Hadoop/HBase development environment.
+3. **Launch and navigate the HBase shell** to interact with a running HBase instance on the Cloudera VM.
+4. **Design and create an HBase table** using column families, demonstrating an understanding of HBase's column-oriented data model.
+5. **Perform core HBase operations** — including inserting, querying, and deleting data — using the HBase shell commands `put`, `get`, `scan`, and `delete`.
+6. **Compare HBase with traditional relational databases**, articulating the differences in schema design, scalability, and use cases.
+7. **Demonstrate a working HBase environment and live operations** to the class, communicating both the technical steps and the conceptual reasoning behind them.
 ---
 
 ## Table of Contents
