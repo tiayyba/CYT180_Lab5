@@ -137,24 +137,7 @@ After downloading, extract the `.zip` file. You will find a folder containing an
 6. Click **Import** and wait for the process to complete — this may take several minutes
 ---
 
-### Step 4: Configure Virtual Machine Settings
-
-Before starting the VM, verify the following settings by selecting the VM and clicking **Settings**:
-
-**System**
-- Go to **Settings → System → Motherboard**: confirm RAM is at least **4096 MB**
-- Go to **Settings → System → Processor**: confirm at least **2 CPU cores** are assigned
-
-**Display**
-- Go to **Settings → Display**: set Video Memory to **128 MB**
-
-**Network** *(optional)*
-- Use **NAT** for basic internet access within the VM
-- Use **Bridged Adapter** if you need the VM to be accessible from other machines on your network
-
----
-
-### Step 5: Start the Cloudera VM
+### Step 4: Start the Cloudera VM
 
 Select the imported VM and click **Start**.
 
@@ -171,7 +154,7 @@ Password: cloudera
 
 ---
 
-### Step 6: Launch HBase
+### Step 5: Launch HBase
 
 Once inside the Cloudera VM, open a **Terminal** window (right-click the desktop → Open Terminal, or find it in the taskbar).
 
