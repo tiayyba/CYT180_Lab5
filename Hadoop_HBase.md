@@ -119,17 +119,11 @@ Select the version matching your operating system (Windows, macOS, or Linux) and
 
 Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDFS, HBase, and other ecosystem tools:
 
-🔗 https://www.cloudera.com/downloads/quickstart_vms.html
-
-Select: **Cloudera QuickStart VM for VirtualBox**
-
-> **⚠️ Registration Required:** Before the download starts, you will be prompted to register or sign in with a Cloudera account. Complete all required fields to proceed.
-
-The file is approximately **5 GB** as a `.zip` archive — use a stable internet connection.
+🔗 https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.13.0-0-virtualbox.zip
 
 After downloading:
-- Extract the `.zip` file using **[7-Zip](https://www.7-zip.org/)** (recommended). The built-in extractor on Windows often fails with files this large.
-- After extraction, you will find a folder containing an **`.ovf` file** — this is what you will use in the next step.
+- Extract the `.zip` file.
+- After extraction, you will find a folder containing an **`.ovf` file** and a **`.vmdk` file** 
 
 ---
 
