@@ -1,11 +1,11 @@
-# 🐘 Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
+# Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
 
 > **Course Lab** | Big Data Systems  
 > Students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 1. [Introduction & Rationale](#-introduction--rationale)
 2. [Real-World Usage of HBase](#-real-world-usage-of-hbase)
