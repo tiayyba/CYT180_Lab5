@@ -8,13 +8,14 @@
 ## Lab Objectives 
 By the end of this lab, students will be able to:
 
-1. **Understand the limitations of HDFS** and explain why HBase was introduced as a complementary technology within the Hadoop ecosystem.
-2. **Install and configure** Oracle VirtualBox and the Cloudera QuickStart VM to create a functional Hadoop/HBase development environment.
-3. **Launch and navigate the HBase shell** to interact with a running HBase instance on the Cloudera VM.
-4. **Design and create an HBase table** using column families, demonstrating an understanding of HBase's column-oriented data model.
-5. **Perform core HBase operations** — including inserting, querying, and deleting data — using the HBase shell commands `put`, `get`, `scan`, and `delete`.
-6. **Compare HBase with traditional relational databases**, articulating the differences in schema design, scalability, and use cases.
-7. **Demonstrate a working HBase environment and live operations** to the class, communicating both the technical steps and the conceptual reasoning behind them.
+- **Understand the limitations of HDFS** and explain why HBase was introduced as a complementary technology within the Hadoop ecosystem.
+- **Install and configure** Oracle VirtualBox and the Cloudera QuickStart VM to create a functional Hadoop/HBase development environment.
+- **Launch and navigate the HBase shell** to interact with a running HBase instance on the Cloudera VM.
+- **Design and create an HBase table** using column families, demonstrating an understanding of HBase's column-oriented data model.
+- **Perform core HBase operations** — including inserting, querying, and deleting data — using the HBase shell commands `put`, `get`, `scan`, and `delete`.
+- **Compare HBase with traditional relational databases**, articulating the differences in schema design, scalability, and use cases.
+- **Demonstrate a working HBase environment and live operations** to the class, communicating both the technical steps and the conceptual reasoning behind them.
+  
 ---
 
 ## Table of Contents
@@ -41,7 +42,7 @@ By the end of this lab, students will be able to:
 
 ---
 
-## 📖 Introduction & Rationale
+## Introduction & Rationale
 
 As organizations began generating massive volumes of data — from web interactions and user activity to sensor logs — traditional relational databases (RDBMS) proved inadequate. These systems require **predefined schemas**, scale vertically (which is costly), and struggle to handle billions of rows or sparse datasets efficiently.
 
@@ -53,7 +54,7 @@ HBase, by contrast, allows direct modification at the row level. Updating a sing
 
 ---
 
-## 🌐 Real-World Usage of HBase
+## Real-World Usage of HBase
 
 HBase has been widely adopted in large-scale enterprise systems where massive datasets and real-time access are required. Companies such as **Facebook, Twitter, LinkedIn, and Yahoo** have used HBase for applications including:
 
@@ -66,7 +67,7 @@ HBase has been widely adopted in large-scale enterprise systems where massive da
 
 ---
 
-## ⚖️ Key Concepts: HDFS vs HBase
+## Key Concepts: HDFS vs HBase
 
 | Feature | HDFS | HBase |
 |---|---|---|
@@ -80,7 +81,7 @@ HDFS is the foundation — it stores the actual data on disk across nodes. HBase
 
 ---
 
-## 🗂️ HBase Data Model
+## HBase Data Model
 
 HBase uses a **column-oriented data model** that differs significantly from traditional relational databases:
 
@@ -103,7 +104,7 @@ Unlike a relational database, not every row needs to have every column — HBase
 
 ---
 
-## ⚙️ Setup Instructions
+##  Setup Instructions
 
 ### Step 1: Install Oracle VirtualBox
 
@@ -111,14 +112,9 @@ Download Oracle VirtualBox from the official website:
 
 🔗 https://www.virtualbox.org/wiki/Downloads
 
-Select the version matching your operating system (Windows, macOS, or Linux) and install using the default settings.
-
-> **Note:** During installation, your network interfaces may briefly reset — this is expected behavior.
-
-Once installed, launch VirtualBox to confirm it opens correctly before proceeding.
+Select the version matching your operating system (Windows, macOS, or Linux) and install using the default settings. Once installed, launch VirtualBox to confirm it opens correctly before proceeding.
 
 ---
-
 ### Step 2: Download Cloudera QuickStart VM
 
 Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDFS, HBase, and other ecosystem tools:
@@ -127,9 +123,13 @@ Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDF
 
 Select: **Cloudera QuickStart VM for VirtualBox**
 
-The file will be in `.zip` or `.ova` format and is several GB in size. Use a stable internet connection.
+> **⚠️ Registration Required:** Before the download starts, you will be prompted to register or sign in with a Cloudera account. Complete all required fields to proceed.
 
-- If downloaded as `.zip`, extract it to obtain the `.ova` file before proceeding.
+The file is approximately **5 GB** as a `.zip` archive — use a stable internet connection.
+
+After downloading:
+- Extract the `.zip` file using **[7-Zip](https://www.7-zip.org/)** (recommended). The built-in extractor on Windows often fails with files this large.
+- After extraction, you will find a folder containing an **`.ovf` file** — this is what you will use in the next step.
 
 ---
 
@@ -137,13 +137,12 @@ The file will be in `.zip` or `.ova` format and is several GB in size. Use a sta
 
 1. Open Oracle VirtualBox
 2. Click **File → Import Appliance**
-3. Browse to and select the `.ova` file
+3. Browse to the extracted folder and select the **`.ovf` file**
 4. Click **Next**
 5. Before importing, set the following resources:
    - **RAM:** Minimum 4 GB (8 GB recommended)
    - **CPU:** Minimum 2 cores
-6. Click **Import** and wait for the process to complete (this may take a few minutes)
-
+6. Click **Import** and wait for the process to complete — this may take several minutes
 ---
 
 ### Step 4: Configure Virtual Machine Settings
