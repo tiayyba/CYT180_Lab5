@@ -129,7 +129,7 @@ Unlike a relational database, not every row needs to have every column — HBase
 Before starting the VM, verify the following settings by selecting the VM and clicking **Settings**:
 
 **System**
-- Go to **Settings → System → Motherboard**: set RAM to at least **5120 MB (5 GB)**
+- Go to **Settings → System → Motherboard**: set RAM to at least **5120 MB (5 GB).** If you have enough RAM, go fo **8 GB**.
 - Go to **Settings → System → Processor**: set at least **2 CPU cores****Display**
 - Go to **Settings → Display**: set Video Memory to **128 MB**
 - Use **NAT** for basic connectivity (default)
