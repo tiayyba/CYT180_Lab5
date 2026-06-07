@@ -10,7 +10,7 @@
 2. [Real-World Usage of HBase](#-real-world-usage-of-hbase)
 3. [Key Concepts: HDFS vs HBase](#-key-concepts-hdfs-vs-hbase)
 4. [HBase Data Model](#-hbase-data-model)
-5. [Setup Instructions]
+5. [Setup Instructions](#-Setup-Instructions)
 6. [Getting Started with HBase](#-hands-on-exercises)
    - [Exercise 1: Create a Table](#exercise-1-create-a-table)
    - [Exercise 2: Insert Data](#exercise-2-insert-data)
