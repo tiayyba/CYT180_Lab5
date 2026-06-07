@@ -311,7 +311,7 @@ get 'students', 'student_001', 'info:name'
 scan 'students'
 ```
 
-> **What is `scan`?** The `scan` command reads across multiple rows in sequence — similar to a `SELECT *` in SQL. It is powerful but can be slow on very large tables since it reads every row. For large datasets, scans are typically filtered using conditions. For this lab, scanning your small table is perfectly appropriate.
+The `scan` command reads across multiple rows in sequence, similar to a `SELECT *` in SQL. It is powerful but can be slow on very large tables since it reads every row. For large datasets, scans are typically filtered using conditions. For this lab, scanning your small table is perfectly appropriate.
 
 **Scan with a filter** (retrieve only names):
 
@@ -319,7 +319,7 @@ scan 'students'
 scan 'students', {COLUMNS => 'info:name'}
 ```
 
-> **What's happening:** `get` performs a direct row key lookup, which is very fast. `scan` reads sequentially across rows, which is useful when you don't know the row key in advance or want to retrieve a range of records.
+ `get` performs a direct row key lookup, which is very fast. `scan` reads sequentially across rows, which is useful when you don't know the row key in advance or want to retrieve a range of records.
 
 ---
 
@@ -355,7 +355,7 @@ scan 'students'
 
 `student_002` should no longer appear in results.
 
-> **What's happening:** HBase deletions work through **tombstone markers** — a special marker is written to indicate the cell or row is deleted. The actual data is removed during a background process called **compaction**. This is why deletions in HBase are fast even on large datasets.
+HBase deletions work through **tombstone markers** — a special marker is written to indicate the cell or row is deleted. The actual data is removed during a background process called **compaction**. This is why deletions in HBase are fast even on large datasets.
 
 **When finished, exit the HBase shell:**
 
@@ -367,7 +367,7 @@ exit
 
 ##  Reflection Questions
 
-These questions are for your own understanding — **no submission required**. Think through your answers as you complete the lab.
+These questions are for your own understanding. **No submission required**. Think through your answers as you complete the lab.
 
 1. Why can't HDFS be used on its own for applications that require frequent data updates? What limitation makes this impractical?
 
@@ -400,15 +400,10 @@ Use this checklist to confirm your setup and prepare for your live demonstration
 
 ### Live Demonstration
 
-- [ ] Create the `students` table with the `info` column family
-- [ ] Insert at least 3 rows of student data using `put`
+- [ ] Design and create a table of your choice with **two column families**.
+- [ ] Insert **4 rows** of data, ensuring that at least 2 rows have **sparse data** (i.e. some columns are intentionally missing from certain rows).
 - [ ] Retrieve a single row using `get`
 - [ ] Scan the full table using `scan`
 - [ ] Delete a specific cell and verify it is removed
 - [ ] Delete an entire row and verify it is removed
-- [ ] Able to explain the difference between HDFS and HBase when asked
 - [ ] Able to explain what a column family is when asked
-
----
-
-*Lab developed for Big Data Systems coursework. Setup based on Cloudera QuickStart VM and Apache HBase.*
