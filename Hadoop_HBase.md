@@ -1,9 +1,8 @@
-# 🐘 Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
+# CYT180 – Lab 5 — Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
+**Weight:** 3% <br>
+**Work Type:** Individual <br>
+**Submission Format:** In class demonstartion: students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts <br>
 
-> **Course Lab** | Big Data Systems  
-> Students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts.
-
----
 
 ## 📋 Table of Contents
 
@@ -31,7 +30,7 @@
 
 ---
 
-## 🎯 Lab Objectives
+## Lab Objectives
 
 By the end of this lab, students will be able to:
 
@@ -45,7 +44,7 @@ By the end of this lab, students will be able to:
 
 ---
 
-## 📖 Introduction & Rationale
+## Introduction & Rationale
 
 As organizations began generating massive volumes of data — from web interactions and user activity to sensor logs — traditional relational databases (RDBMS) proved inadequate. These systems require **predefined schemas**, scale vertically (which is costly), and struggle to handle billions of rows or sparse datasets efficiently.
 
@@ -57,7 +56,7 @@ HBase, by contrast, allows direct modification at the row level. Updating a sing
 
 ---
 
-## 🌐 Real-World Usage of HBase
+## Real-World Usage of HBase
 
 HBase has been widely adopted in large-scale enterprise systems where massive datasets and real-time access are required. Companies such as **Facebook, Twitter, LinkedIn, and Yahoo** have used HBase for applications including:
 
@@ -70,7 +69,7 @@ HBase has been widely adopted in large-scale enterprise systems where massive da
 
 ---
 
-## ⚖️ Key Concepts: HDFS vs HBase
+##  Key Concepts: HDFS vs HBase
 
 | Feature | HDFS | HBase |
 |---|---|---|
@@ -84,7 +83,7 @@ HDFS is the foundation — it stores the actual data on disk across nodes. HBase
 
 ---
 
-## 🗂️ HBase Data Model
+##  HBase Data Model
 
 HBase uses a **column-oriented data model** that differs significantly from traditional relational databases:
 
@@ -101,13 +100,14 @@ Row Key     | info:name     | info:grade   | info:major
 ------------|---------------|--------------|------------
 student_001 | Alice Johnson | A            | Computer Science
 student_002 | Bob Smith     | B+           | Data Science
+student_002 | Maija Sam     |              | Data Science
 ```
 
 Unlike a relational database, not every row needs to have every column — HBase handles **sparse data** efficiently.
 
 ---
 
-## ⚙️ Setup Instructions
+##  Setup Instructions
 
 ### Step 1: Install Oracle VirtualBox
 
@@ -195,7 +195,9 @@ For each service:
 2. Select **Actions → Delete**
 3. Confirm the deletion
 
-> Removing these services frees up significant memory and CPU, making the remaining services — including HBase — run noticeably faster.
+Please note that **Solr and Sqoop 2:** are used internally by **Hue**. When you attempt to delete them, Cloudera Manager will display a **"Configure Service Dependency"** button instead of proceeding. Click it — this loads the Hue configuration page where the dependency is listed. Set the value to **None** and save. Once saved, return and delete the service as normal.
+
+Removing these services frees up significant memory and CPU, making the remaining services — including HBase — run noticeably faster.
 
 ---
 
@@ -239,7 +241,7 @@ You are now ready to begin the hands-on exercises. All commands in the next sect
 
 ---
 
-## 🧪 Hands-On Exercises
+## Getting Started with HBase 
 
 > All commands are run inside the **HBase shell** unless stated otherwise.
 
@@ -375,7 +377,7 @@ exit
 
 ---
 
-## 💭 Reflection Questions
+##  Reflection Questions
 
 These questions are for your own understanding — **no submission required**. Think through your answers as you complete the lab.
 
@@ -393,7 +395,7 @@ These questions are for your own understanding — **no submission required**. T
 
 ---
 
-## ✅ Lab Checklist
+##  Lab Checklist
 
 Use this checklist to confirm your setup and prepare for your live demonstration.
 
