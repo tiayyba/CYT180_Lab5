@@ -102,14 +102,14 @@ Unlike a relational database, not every row needs to have every column — HBase
 
 ### Step 1: Install Oracle VirtualBox
 
-- Download Oracle VirtualBox from the official website: 🔗 https://www.virtualbox.org/wiki/Downloads
+- Download Oracle VirtualBox from the official website: https://www.virtualbox.org/wiki/Downloads
 - Select the version matching your operating system (Windows, macOS, or Linux) and install using the default settings.
 
 ---
 
 ### Step 2: Download Cloudera QuickStart VM
 
-- Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDFS, HBase, and other ecosystem tools: 🔗 https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.13.0-0-virtualbox.zip
+- Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDFS, HBase, and other ecosystem tools: https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.13.0-0-virtualbox.zip
 - The file is approximately **5 GB** as a `.zip` archive — use a stable internet connection.
 - After downloading: extract the `.zip` file. You will find a folder containing an **`.ovf` file** — this is what you will use in the next step.
 
