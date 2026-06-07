@@ -236,8 +236,6 @@ You are now ready to begin the hands-on exercises. All commands in the next sect
 
 > All commands are run inside the **HBase shell** unless stated otherwise.
 
----
-
 ### Exercise 1: Create a Table
 
 In HBase, tables must be created with at least one **column family**. In this exercise, you will create a table called `students` with a column family called `info`.
