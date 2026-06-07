@@ -1,24 +1,11 @@
-# CYT180 – Lab 5 — Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
-**Weight:** 3% <br>
-**Work Type:** Individual <br>
-**Submission Format:** In class Demondtration: Students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts.
+# 🐘 Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
+
+> **Course Lab** | Big Data Systems  
+> Students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts.
 
 ---
 
-## Lab Objectives 
-By the end of this lab, students will be able to:
-
-- **Understand the limitations of HDFS** and explain why HBase was introduced as a complementary technology within the Hadoop ecosystem.
-- **Install and configure** Oracle VirtualBox and the Cloudera QuickStart VM to create a functional Hadoop/HBase development environment.
-- **Launch and navigate the HBase shell** to interact with a running HBase instance on the Cloudera VM.
-- **Design and create an HBase table** using column families, demonstrating an understanding of HBase's column-oriented data model.
-- **Perform core HBase operations** — including inserting, querying, and deleting data — using the HBase shell commands `put`, `get`, `scan`, and `delete`.
-- **Compare HBase with traditional relational databases**, articulating the differences in schema design, scalability, and use cases.
-- **Demonstrate a working HBase environment and live operations** to the class, communicating both the technical steps and the conceptual reasoning behind them.
-  
----
-
-## Table of Contents
+## 📋 Table of Contents
 
 1. [Introduction & Rationale](#-introduction--rationale)
 2. [Real-World Usage of HBase](#-real-world-usage-of-hbase)
@@ -28,10 +15,12 @@ By the end of this lab, students will be able to:
    - [Step 1: Install Oracle VirtualBox](#step-1-install-oracle-virtualbox)
    - [Step 2: Download Cloudera QuickStart VM](#step-2-download-cloudera-quickstart-vm)
    - [Step 3: Import VM into VirtualBox](#step-3-import-vm-into-virtualbox)
-   - [Step 4: Configure VM Settings](#step-4-configure-virtual-machine-settings)
-   - [Step 5: Start the Cloudera VM](#step-5-start-the-cloudera-vm)
-   - [Step 6: Launch HBase](#step-6-launch-hbase)
-   - [Step 7: Open the HBase Shell](#step-7-open-the-hbase-shell)
+   - [Step 4: Configure Virtual Machine Settings](#step-4-configure-virtual-machine-settings)
+   - [Step 5: Start the Cloudera VM and Launch Cloudera Express](#step-5-start-the-cloudera-vm-and-launch-cloudera-express)
+   - [Step 6: Access the Cloudera Admin Console](#step-6-access-the-cloudera-admin-console)
+   - [Step 7: Remove Unnecessary Services](#step-7-remove-unnecessary-services-recommended)
+   - [Step 8: Restart the Cluster and Verify](#step-8-restart-the-cluster-and-verify)
+   - [Step 9: Open the HBase Shell](#step-9-open-the-hbase-shell)
 6. [Hands-On Exercises](#-hands-on-exercises)
    - [Exercise 1: Create a Table](#exercise-1-create-a-table)
    - [Exercise 2: Insert Data](#exercise-2-insert-data)
@@ -42,7 +31,21 @@ By the end of this lab, students will be able to:
 
 ---
 
-## Introduction & Rationale
+## 🎯 Lab Objectives
+
+By the end of this lab, students will be able to:
+
+1. **Understand the limitations of HDFS** and explain why HBase was introduced as a complementary technology within the Hadoop ecosystem.
+2. **Install and configure** Oracle VirtualBox and the Cloudera QuickStart VM to create a functional Hadoop/HBase development environment.
+3. **Launch and navigate the HBase shell** to interact with a running HBase instance on the Cloudera VM.
+4. **Design and create an HBase table** using column families, demonstrating an understanding of HBase's column-oriented data model.
+5. **Perform core HBase operations** — including inserting, querying, and deleting data — using the HBase shell commands `put`, `get`, `scan`, and `delete`.
+6. **Compare HBase with traditional relational databases**, articulating the differences in schema design, scalability, and use cases.
+7. **Demonstrate a working HBase environment and live operations** to the class, communicating both the technical steps and the conceptual reasoning behind them.
+
+---
+
+## 📖 Introduction & Rationale
 
 As organizations began generating massive volumes of data — from web interactions and user activity to sensor logs — traditional relational databases (RDBMS) proved inadequate. These systems require **predefined schemas**, scale vertically (which is costly), and struggle to handle billions of rows or sparse datasets efficiently.
 
@@ -54,7 +57,7 @@ HBase, by contrast, allows direct modification at the row level. Updating a sing
 
 ---
 
-## Real-World Usage of HBase
+## 🌐 Real-World Usage of HBase
 
 HBase has been widely adopted in large-scale enterprise systems where massive datasets and real-time access are required. Companies such as **Facebook, Twitter, LinkedIn, and Yahoo** have used HBase for applications including:
 
@@ -67,7 +70,7 @@ HBase has been widely adopted in large-scale enterprise systems where massive da
 
 ---
 
-## Key Concepts: HDFS vs HBase
+## ⚖️ Key Concepts: HDFS vs HBase
 
 | Feature | HDFS | HBase |
 |---|---|---|
@@ -81,7 +84,7 @@ HDFS is the foundation — it stores the actual data on disk across nodes. HBase
 
 ---
 
-## HBase Data Model
+## 🗂️ HBase Data Model
 
 HBase uses a **column-oriented data model** that differs significantly from traditional relational databases:
 
@@ -104,7 +107,7 @@ Unlike a relational database, not every row needs to have every column — HBase
 
 ---
 
-##  Setup Instructions
+## ⚙️ Setup Instructions
 
 ### Step 1: Install Oracle VirtualBox
 
@@ -112,16 +115,29 @@ Download Oracle VirtualBox from the official website:
 
 🔗 https://www.virtualbox.org/wiki/Downloads
 
-Select the version matching your operating system (Windows, macOS, or Linux) and install using the default settings. Once installed, launch VirtualBox to confirm it opens correctly before proceeding.
+Select the version matching your operating system (Windows, macOS, or Linux) and install using the default settings.
+
+> **Note:** During installation, your network interfaces may briefly reset — this is expected behavior.
+
+Once installed, launch VirtualBox to confirm it opens correctly before proceeding.
 
 ---
+
 ### Step 2: Download Cloudera QuickStart VM
 
 Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDFS, HBase, and other ecosystem tools:
 
-🔗 https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.13.0-0-virtualbox.zip
+🔗 https://www.cloudera.com/downloads/quickstart_vms.html
 
-After downloading, extract the `.zip` file. You will find a folder containing an **`.ovf` file** and a **`.vmdk` file** 
+Select: **Cloudera QuickStart VM for VirtualBox**
+
+> **⚠️ Registration Required:** Before the download starts, you will be prompted to register or sign in with a Cloudera account. Complete all required fields to proceed.
+
+The file is approximately **5 GB** as a `.zip` archive — use a stable internet connection.
+
+After downloading:
+- Extract the `.zip` file using **[7-Zip](https://www.7-zip.org/)** (recommended). The built-in extractor on Windows often fails with files this large.
+- After extraction, you will find a folder containing an **`.ovf` file** — this is what you will use in the next step.
 
 ---
 
@@ -132,53 +148,103 @@ After downloading, extract the `.zip` file. You will find a folder containing an
 3. Browse to the extracted folder and select the **`.ovf` file**
 4. Click **Next**
 5. Before importing, set the following resources:
-   - **RAM:** Minimum 4 GB (8 GB recommended)
+   - **RAM:** Minimum 5 GB (5120 MB)
    - **CPU:** Minimum 2 cores
 6. Click **Import** and wait for the process to complete — this may take several minutes
+
 ---
 
-### Step 4: Start the Cloudera VM
+### Step 4: Configure Virtual Machine Settings
 
-Select the imported VM and click **Start**.
+Before starting the VM, verify the following settings by selecting the VM and clicking **Settings**:
 
-The VM will boot into a Linux desktop environment. This may take **2–5 minutes** on first launch.
+**System**
+- Go to **Settings → System → Motherboard**: set RAM to at least **5120 MB (5 GB)**
+- Go to **Settings → System → Processor**: set at least **2 CPU cores**
 
-Once loaded, log in with the default credentials:
+> **⚠️ Important:** Cloudera services are resource-intensive on a single-node setup. Allocating less than 5 GB of RAM will result in slow or failed service starts.
+
+**Display**
+- Go to **Settings → Display**: set Video Memory to **128 MB**
+
+**Network**
+- Use **NAT** for basic connectivity (default)
+
+---
+
+### Step 5: Start the Cloudera VM and Launch Cloudera Express
+
+Select the imported VM and click **Start**. The VM will boot into a Linux desktop. This may take **2–5 minutes** on first launch.
+
+Once the desktop loads, open a **Terminal** and run the following command to switch to Cloudera Express and restart all cluster services:
+
+```bash
+sudo /home/cloudera/cloudera-manager --express --force
+```
+
+This command shuts down existing services, switches the edition to **Cloudera Express**, and restarts the SCM Server and Agents. This process can take **3–5 minutes**. Wait until the terminal confirms services have restarted before proceeding.
+
+> **What is the SCM Server?** Unlike standard Apache Hadoop where you manually start services using shell scripts, Cloudera uses the **SCM (Service Control Manager) Server** to manage all services centrally. The SCM Server communicates instructions to SCM Agents running on each node, which handle the actual starting and stopping of services. On this single-node VM, both the server and agent run on the same machine.
+
+---
+
+### Step 6: Access the Cloudera Admin Console
+
+Once the SCM components are active, open the browser inside the VM and navigate to:
+
+```
+http://localhost:7180
+```
+
+Log in with the default credentials:
 
 ```
 Username: cloudera
 Password: cloudera
 ```
 
-> If prompted at any point during boot, click through any configuration wizards using the default options.
+This is the **Cloudera Manager Admin Console** — a web UI where you can monitor and manage all cluster services.
 
 ---
 
-### Step 5: Launch HBase
+### Step 7: Remove Unnecessary Services (Recommended)
 
-Once inside the Cloudera VM, open a **Terminal** window (right-click the desktop → Open Terminal, or find it in the taskbar).
+Because this is a single-node setup, running all services simultaneously is very resource-heavy. To improve performance, remove the following services from Cloudera Manager:
 
-Start the HBase service by running:
+- **Key-Value Store Indexer**
+- **Solr**
+- **Sqoop 2**
 
-```bash
-start-hbase.sh
-```
+For each service:
+1. Click on the service name in the Admin Console
+2. Select **Actions → Delete**
+3. Confirm the deletion
 
-Wait for the command to complete. You should see output confirming that HBase master and region servers have started. This may take **30–60 seconds**.
-
-To verify HBase is running:
-
-```bash
-hbase status
-```
-
-Expected output will show `1 active master` and region server details.
+> Removing these services frees up significant memory and CPU, making the remaining services — including HBase — run noticeably faster.
 
 ---
 
-### Step 7: Open the HBase Shell
+### Step 8: Restart the Cluster and Verify
 
-Launch the interactive HBase shell:
+After removing unnecessary services, restart the cluster:
+
+1. In the Admin Console, click **Actions → Restart** at the cluster level
+2. Wait for all remaining services to show a **green status**
+
+You can also verify service status from the terminal:
+
+```bash
+sudo service cloudera-scm-server status
+sudo service cloudera-scm-agent status
+```
+
+Both should return `running`. Once all services are green, your environment is ready to proceed.
+
+---
+
+### Step 9: Open the HBase Shell
+
+Open a Terminal inside the VM and launch the interactive HBase shell:
 
 ```bash
 hbase shell
@@ -359,11 +425,12 @@ Use this checklist to confirm your setup and prepare for your live demonstration
 ### Environment Setup
 
 - [ ] Oracle VirtualBox installed and launching correctly
-- [ ] Cloudera QuickStart VM downloaded and extracted
-- [ ] VM imported into VirtualBox with correct RAM (≥ 4 GB) and CPU (≥ 2 cores) settings
-- [ ] VM boots successfully and desktop loads
-- [ ] Terminal accessible inside the VM
-- [ ] `start-hbase.sh` runs without errors
+- [ ] Cloudera QuickStart VM downloaded and extracted using 7-Zip
+- [ ] VM imported into VirtualBox with correct RAM (≥ 5 GB) and CPU (≥ 2 cores) settings
+- [ ] Cloudera Express launched successfully via terminal command
+- [ ] Cloudera Admin Console accessible at `localhost:7180`
+- [ ] Unnecessary services (Key-Value Store, Solr, Sqoop 2) removed
+- [ ] Cluster restarted and all services showing green status
 - [ ] `hbase shell` opens successfully
 
 ### Live Demonstration
