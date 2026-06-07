@@ -31,7 +31,7 @@ By the end of this lab, students will be able to:
 4. **Design and create an HBase table** using column families, demonstrating an understanding of HBase's column-oriented data model.
 5. **Perform core HBase operations** — including inserting, querying, and deleting data — using the HBase shell commands `put`, `get`, `scan`, and `delete`.
 6. **Compare HBase with traditional relational databases**, articulating the differences in schema design, scalability, and use cases.
-7. **Demonstrate a working HBase environment and live operations** to the class, communicating both the technical steps and the conceptual reasoning behind them.
+7. **Demonstrate a working HBase environment**  communicating both the technical steps and the conceptual reasoning behind them.
 
 ---
 
