@@ -401,7 +401,7 @@ Use this checklist to confirm your setup and prepare for your live demonstration
 ### Live Demonstration
 
 - [ ] Design and create a table of your choice with **two column families**.
-- [ ] Insert **4 rows** of data, ensuring that at least 2 rows have **sparse data** (i.e. some columns are intentionally missing from certain rows).
+- [ ] Insert **3 rows** of data, ensuring that at least 1 rows have **sparse data** (i.e. some columns are intentionally missing from certain rows).
 - [ ] Retrieve a single row using `get`
 - [ ] Scan the full table using `scan`
 - [ ] Delete a specific cell and verify it is removed
