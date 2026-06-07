@@ -186,7 +186,7 @@ For each service:
 2. Select **Actions → Delete**
 3. Confirm the deletion
 
-Please note that **Solr and Sqoop 2:** are used internally by **Hue**. When you attempt to delete them, Cloudera Manager will display a **"Configure Service Dependency"** button instead of proceeding. Click it — this loads the Hue configuration page where the dependency is listed. Set the value to **None** and save. Once saved, return and delete the service as normal.
+Please note that **Solr and Sqoop 2** are used internally by **Hue**. When you attempt to delete them, Cloudera Manager will display a **"Configure Service Dependency"** button instead of proceeding. Click it — this loads the Hue configuration page where the dependency is listed. Set the value to **None** and save. Once saved, return and delete the service as normal.
 
 Removing these services frees up significant memory and CPU, making the remaining services — including HBase — run noticeably faster.
 
