@@ -169,7 +169,7 @@ Username: cloudera
 Password: cloudera
 ```
 
-This is the **Cloudera Manager Admin Console** — a web UI where you can monitor and manage all cluster services.
+This is the **Cloudera Manager Admin Console** — a web UI where you can monitor and manage all cluster services. Try to familiarize yourself with the envorinment.
 
 ---
 
