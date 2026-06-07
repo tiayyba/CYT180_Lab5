@@ -285,7 +285,7 @@ put 'students', 'student_003', 'info:grade', 'A-'
 put 'students', 'student_003', 'info:major', 'Information Systems'
 ```
 
-> **What's happening:** Each `put` writes a value to a specific cell (row + column intersection). HBase stores a **timestamp** automatically with every write — this is how versioning works. Running the same `put` again with a new value does not overwrite; it adds a new version.
+Each `put` writes a value to a specific cell (row + column intersection). HBase stores a **timestamp** automatically with every write — this is how versioning works. Running the same `put` again with a new value does not overwrite; it adds a new version.
 
 ---
 
