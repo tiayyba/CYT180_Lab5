@@ -389,9 +389,9 @@ Use this checklist to confirm your setup and prepare for your live demonstration
 
 ### Environment Setup
 
-- [ ] Oracle VirtualBox installed and launching correctly
-- [ ] Cloudera QuickStart VM downloaded and extracted using 7-Zip
-- [ ] VM imported into VirtualBox with correct RAM (≥ 5 GB) and CPU (≥ 2 cores) settings
+ [ ] Oracle VirtualBox installed and launching correctly
+ [ ] Cloudera QuickStart VM downloaded and extracted using 7-Zip
+ [ ] VM imported into VirtualBox with correct RAM (≥ 5 GB) and CPU (≥ 2 cores) settings
 - [ ] Cloudera Express launched successfully via terminal command
 - [ ] Cloudera Admin Console accessible at `localhost:7180`
 - [ ] Unnecessary services (Key-Value Store, Solr, Sqoop 2) removed
