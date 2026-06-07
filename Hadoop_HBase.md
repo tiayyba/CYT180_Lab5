@@ -261,8 +261,7 @@ describe 'students'
 ```
 
 This shows the table structure including the column family and its default settings.
-
-> **What's happening:** HBase is registering the table metadata and preparing storage regions on HDFS. The column family `info` is the container under which all columns for this table will live.
+HBase is registering the table metadata and preparing storage regions on HDFS. The column family `info` is the container under which all columns for this table will live.
 
 ---
 
