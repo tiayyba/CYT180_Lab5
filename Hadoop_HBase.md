@@ -111,33 +111,16 @@ Unlike a relational database, not every row needs to have every column — HBase
 
 ### Step 1: Install Oracle VirtualBox
 
-Download Oracle VirtualBox from the official website:
-
-🔗 https://www.virtualbox.org/wiki/Downloads
-
-Select the version matching your operating system (Windows, macOS, or Linux) and install using the default settings.
-
-> **Note:** During installation, your network interfaces may briefly reset — this is expected behavior.
-
-Once installed, launch VirtualBox to confirm it opens correctly before proceeding.
+- Download Oracle VirtualBox from the official website: 🔗 https://www.virtualbox.org/wiki/Downloads
+- Select the version matching your operating system (Windows, macOS, or Linux) and install using the default settings.
 
 ---
 
 ### Step 2: Download Cloudera QuickStart VM
 
-Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDFS, HBase, and other ecosystem tools:
-
-🔗 https://www.cloudera.com/downloads/quickstart_vms.html
-
-Select: **Cloudera QuickStart VM for VirtualBox**
-
-> **⚠️ Registration Required:** Before the download starts, you will be prompted to register or sign in with a Cloudera account. Complete all required fields to proceed.
-
-The file is approximately **5 GB** as a `.zip` archive — use a stable internet connection.
-
-After downloading:
-- Extract the `.zip` file using **[7-Zip](https://www.7-zip.org/)** (recommended). The built-in extractor on Windows often fails with files this large.
-- After extraction, you will find a folder containing an **`.ovf` file** — this is what you will use in the next step.
+- Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDFS, HBase, and other ecosystem tools: 🔗 https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.13.0-0-virtualbox.zip
+- The file is approximately **5 GB** as a `.zip` archive — use a stable internet connection.
+- After downloading: extract the `.zip` file. Youu will find a folder containing an **`.ovf` file** — this is what you will use in the next step.
 
 ---
 
@@ -146,11 +129,7 @@ After downloading:
 1. Open Oracle VirtualBox
 2. Click **File → Import Appliance**
 3. Browse to the extracted folder and select the **`.ovf` file**
-4. Click **Next**
-5. Before importing, set the following resources:
-   - **RAM:** Minimum 5 GB (5120 MB)
-   - **CPU:** Minimum 2 cores
-6. Click **Import** and wait for the process to complete — this may take several minutes
+4. Click **Next** and click **Finish**. Wait for the process to complete — this may take several minutes
 
 ---
 
@@ -160,22 +139,19 @@ Before starting the VM, verify the following settings by selecting the VM and cl
 
 **System**
 - Go to **Settings → System → Motherboard**: set RAM to at least **5120 MB (5 GB)**
-- Go to **Settings → System → Processor**: set at least **2 CPU cores**
-
-> **⚠️ Important:** Cloudera services are resource-intensive on a single-node setup. Allocating less than 5 GB of RAM will result in slow or failed service starts.
-
-**Display**
+- Go to **Settings → System → Processor**: set at least **2 CPU cores****Display**
 - Go to **Settings → Display**: set Video Memory to **128 MB**
-
-**Network**
 - Use **NAT** for basic connectivity (default)
+
+
+Cloudera services are resource-intensive on a single-node setup. Allocating less than 5 GB of RAM will result in slow or failed service starts.
+
 
 ---
 
 ### Step 5: Start the Cloudera VM and Launch Cloudera Express
 
 Select the imported VM and click **Start**. The VM will boot into a Linux desktop. This may take **2–5 minutes** on first launch.
-
 Once the desktop loads, open a **Terminal** and run the following command to switch to Cloudera Express and restart all cluster services:
 
 ```bash
@@ -183,8 +159,7 @@ sudo /home/cloudera/cloudera-manager --express --force
 ```
 
 This command shuts down existing services, switches the edition to **Cloudera Express**, and restarts the SCM Server and Agents. This process can take **3–5 minutes**. Wait until the terminal confirms services have restarted before proceeding.
-
-> **What is the SCM Server?** Unlike standard Apache Hadoop where you manually start services using shell scripts, Cloudera uses the **SCM (Service Control Manager) Server** to manage all services centrally. The SCM Server communicates instructions to SCM Agents running on each node, which handle the actual starting and stopping of services. On this single-node VM, both the server and agent run on the same machine.
+Cloudera uses SCM server. Unlike standard Apache Hadoop where you manually start services using shell scripts, Cloudera uses the **SCM (Service Control Manager) Server** to manage all services centrally. The SCM Server communicates instructions to SCM Agents running on each node, which handle the actual starting and stopping of services. On this single-node VM, both the server and agent run on the same machine.
 
 ---
 
