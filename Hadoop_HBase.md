@@ -4,7 +4,7 @@
 **Submission Format:** In class demonstartion: students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts <br>
 
 
-## 📋 Table of Contents
+## Table of Contents
 
 1. [Introduction & Rationale](#-introduction--rationale)
 2. [Real-World Usage of HBase](#-real-world-usage-of-hbase)
