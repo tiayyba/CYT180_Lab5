@@ -460,7 +460,6 @@ Answer each question in 1–3 sentences. For questions that ask you to run code,
 4. **Spark and Hadoop.** Our download was called `spark-3.5.2-bin-hadoop3`. Was Hadoop (HDFS or YARN) running during this lab? What does Hadoop provide in this download?
 5. **Moving to a cluster.** Suppose you are given a Hadoop cluster with YARN and HDFS. What two things would you change to run this lab’s code there? (Hint: the master setting, and the file path.)
 6. **Partitions.** Run `df2.rdd.getNumPartitions()`. How many partitions does `df2` have? Why does Spark split data into partitions?
-7. **Shuffle.** To do `groupBy("location")`, Spark has to bring all rows for the same country together, even if they are in different partitions. This moving of data is called a **shuffle**. Why is a shuffle slower than a simple `filter`?
 8. **Spark or Pandas?** Give one situation where you would use Spark instead of Pandas, and one where Pandas is good enough.
 
 ---
@@ -478,7 +477,6 @@ Submit screenshots that clearly show the work you completed in this lab. Your sc
 
 3. **Section 3:**
    - `df2.printSchema()` after converting the date
-   - Your subset row count
    - Your latest 10 records for Canada
    - Total new deaths by location
 
@@ -491,12 +489,7 @@ Submit screenshots that clearly show the work you completed in this lab. Your sc
    - The action output (`agg_cases.count()`)
 
 6. **Section 6:**
-   - Screenshots for reflection questions 2 and 6.
+   - Answers to reflection questions.
 
-7. **Written answers** to all review and reflection questions:
-   - Put each answer directly under the related screenshot.
-   - Keep answers short (1–3 sentences each).
 
-8. Work must be complete, well organized and professionally presented. Screenshots that are too small, blurry, or show unrelated output can lose up to 100% of the marks.
-
-9. Show the current date/time and your unique username in your screenshots to prove the work is yours.
+7. Work must be complete, well organized and professionally presented. Screenshots that are too small, blurry, or show unrelated output can lose up to 100% of the marks.
