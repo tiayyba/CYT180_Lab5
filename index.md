@@ -136,13 +136,13 @@ spark
 
 What each line does:
 
-1. `findspark.init()` tells Python where the Spark folder is.
-2. `from pyspark.sql import SparkSession` loads the tool we use to create a session.
-3. `SparkSession.builder` starts describing the session we want.
+1. `findspark.init()` helps Python locate the Spark installation so that it can import PySpark modules.
+2. `from pyspark.sql import SparkSession` imports the SparkSession class from PySpark's SQL module. A SparkSession is the main entry point for working with Spark DataFrames and SQL queries. Even if we do not write SQL queries, we use SparkSession to create and manage our Spark session.
+3. `SparkSession.builder` starts building the configuration for the Spark session we want to use.
 4. `.appName("CYT180 Lab 5")` gives our program a name. On a cluster, this name shows up in the list of running jobs.
-5. `.master("local[*]")` is the important one. It sets the **mode**:
-   - `local` means: run on this one computer, not on a cluster.
-   - `[*]` means: use **all** the CPU cores this computer has.
+5. `.master("local[*]")` specifies where and how Spark will run. It sets the **mode**:
+   - `local` means: run on this one computer, rather than using a cluster manager.
+   - `[*]` means: use **all** available logical CPU cores on this computer to execute tasks in parallel.
 6. `.getOrCreate()` creates the session. If one already exists, it reuses it instead of making a second one.
 
 **So our Spark session runs in local mode (`local[*]`) on one Colab computer, using all of its CPU cores.**
