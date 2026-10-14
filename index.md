@@ -16,14 +16,6 @@ You can write Spark programs in Python, Scala, Java or R. The Python version is 
 
 You used **Pandas** in Week 3. Pandas works on one computer and the whole table must fit in that computer’s memory. Spark works in a similar way (tables with rows and columns), but it can handle data that is far too big for one computer.
 
-In this lab you will:
-
-- install Spark in Google Colab,
-- check which **mode** Spark is running in,
-- load a real dataset into Spark and explore it,
-- calculate a 7-day moving average,
-- see the difference between **transformations** and **actions**.
-
 PySpark documentation: http://spark.apache.org/docs/latest/api/python/
 
 ---
