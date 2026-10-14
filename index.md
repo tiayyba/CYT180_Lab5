@@ -1,4 +1,4 @@
-# CYT180 — Lab 6: Getting Started with PySpark in Google Colab
+# CYT180 — Lab 5: Getting Started with PySpark in Google Colab
 **Weight:** 3% <br>
 **Work Type:** Individual <br>
 **Submission Format:** screenshots.
