@@ -1,409 +1,382 @@
-# CYT180 – Lab 5 — Hadoop & HBase Lab: Cloudera VM Setup and Hands-On Practice
+# CYT180 — Lab 6: Getting Started with PySpark in Google Colab
 **Weight:** 3% <br>
 **Work Type:** Individual <br>
-**Submission Format:** In class demonstartion: students are required to **install, configure, and demonstrate HBase operations live during class**, along with explaining key concepts <br>
+**Submission Format:** screenshots.
 
+----
 
-## Table of Contents
+## Introduction
 
-1. [Introduction & Rationale](#-introduction--rationale)
-2. [Real-World Usage of HBase](#-real-world-usage-of-hbase)
-3. [Key Concepts: HDFS vs HBase](#-key-concepts-hdfs-vs-hbase)
-4. [HBase Data Model](#-hbase-data-model)
-5. [Setup Instructions](#-Setup-Instructions)
-6. [Getting Started with HBase](#-hands-on-exercises)
-   - [Exercise 1: Create a Table](#exercise-1-create-a-table)
-   - [Exercise 2: Insert Data](#exercise-2-insert-data)
-   - [Exercise 3: Query Data](#exercise-3-query-data)
-   - [Exercise 4: Delete Data](#exercise-4-delete-data)
-7. [Reflection Questions](#-reflection-questions)
-8. [Lab Checklist](#-lab-checklist)
+Apache Spark is a high‑performance, open‑source distributed computing framework designed to process large‑scale data efficiently across clusters of machines. 
 
----
+Unlike traditional MapReduce systems, Spark accelerates computation through in‑memory processing, drastically reducing the overhead of reading and writing intermediate results to disk. This capability makes it particularly powerful for iterative workloads such as machine learning, real‑time stream processing, interactive SQL queries, and graph analytics. 
 
-## Lab Objectives
+Spark supports development in Scala, Python, Java, and R, making it accessible to a wide range of users. It also provides language‑specific implementations such as PySpark for Python and sparklyr for R. While languages like Python provide their own local data‑processing libraries (such as Pandas), Apache Spark extends these capabilities to distributed environments, enabling applications to scale from laptops to clusters handling petabytes of data.
 
-By the end of this lab, students will be able to:
+In this lab, you will explore Apache Spark’s core concepts, learn how distributed data processing works, and gain hands‑on experience using Spark to manipulate and analyze large datasets. This foundation will prepare you for more advanced topics, including machine learning pipelines, streaming data, and large‑scale analytics.
 
-1. **Understand the limitations of HDFS** and explain why HBase was introduced as a complementary technology within the Hadoop ecosystem.
-2. **Install and configure** Oracle VirtualBox and the Cloudera QuickStart VM to create a functional Hadoop/HBase development environment.
-3. **Launch and navigate the HBase shell** to interact with a running HBase instance on the Cloudera VM.
-4. **Design and create an HBase table** using column families, demonstrating an understanding of HBase's column-oriented data model.
-5. **Perform core HBase operations** — including inserting, querying, and deleting data — using the HBase shell commands `put`, `get`, `scan`, and `delete`.
-6. **Compare HBase with traditional relational databases**, articulating the differences in schema design, scalability, and use cases.
-7. **Demonstrate a working HBase environment**  communicating both the technical steps and the conceptual reasoning behind them.
+PySpark is the Python interface for Apache Spark, useful for distributed data processing and pipelines. Even on modest data, Spark’s DataFrame API and Spark SQL can make many data‑wrangling tasks shorter, clearer, and easier to maintain than pandas.
 
----
+Docs: <http://spark.apache.org/docs/latest/api/python/>
 
-## Introduction & Rationale
+----
 
-As organizations began generating massive volumes of data — from web interactions and user activity to sensor logs — traditional relational databases (RDBMS) proved inadequate. These systems require **predefined schemas**, scale vertically (which is costly), and struggle to handle billions of rows or sparse datasets efficiently.
+## Learning Objectives
+By the end of this lab, you will be able to:
 
-To address these challenges, Google introduced **BigTable**, a distributed storage system built for large-scale structured data. HBase was later developed as an open-source implementation inspired by BigTable, designed to run on top of Hadoop's Distributed File System (**HDFS**).
+- Initialize a Spark session in Colab and verify the environment.
+- Load CSV data into a Spark DataFrame and inspect schema & summary stats.
+- Perform common transformations (select, filter, withColumn, groupBy).
+- Run Spark SQL queries using temporary views.
+- Explain the difference between transformations and actions.
+- Observe performance concepts: lazy evaluation, caching, and partitions.
 
-HBase enables **real-time random read/write access to massive datasets** — something HDFS alone cannot provide. While HDFS is optimized for high-throughput batch processing, it is **immutable**: once a file is written, it cannot be modified without rewriting it entirely. This makes HDFS unsuitable for applications requiring frequent updates.
+----
+  
+## Section 1 — Getting Started
+PySpark is the Python interface for Apache Spark, allowing scalable distributed data processing. In this lab, we will run Spark inside Google Colab. PySpark requires a Java runtime, the Spark framework, and a Python interface layer. Google Colab does not include Spark by default, so in this section we prepare the environment so Spark can run inside the notebook.
 
-HBase, by contrast, allows direct modification at the row level. Updating a single value in HDFS requires rewriting an entire file; in HBase, it takes a single command and happens instantly. Understanding this distinction is central to this lab.
-
----
-
-## Real-World Usage of HBase
-
-HBase has been widely adopted in large-scale enterprise systems where massive datasets and real-time access are required. Companies such as **Facebook, Twitter, LinkedIn, and Yahoo** have used HBase for applications including:
-
-- **Messaging systems** — storing and retrieving billions of messages efficiently
-- **Time-series analytics** — tracking user events and behavioral patterns over time
-- **Activity feeds** — continuously writing and querying user activity streams in real time
-- **IoT data storage** — handling constant streams of sensor data requiring rapid retrieval
-
-> **Note:** While HBase remains relevant and is a foundational NoSQL technology, many modern systems are moving toward Cassandra, DynamoDB, and cloud-native data warehouses. Understanding HBase gives you the conceptual grounding to work with any of these systems.
-
----
-
-##  Key Concepts: HDFS vs HBase
-
-| Feature | HDFS | HBase |
-|---|---|---|
-| **Purpose** | Store large files, batch processing | Real-time read/write access |
-| **Mutability** | Immutable (no in-place updates) | Mutable (row-level updates) |
-| **Access Pattern** | Sequential reads/writes | Random reads/writes |
-| **Best For** | MapReduce jobs, log archiving | Messaging, transactions, user profiles |
-| **Built On** | Standalone distributed filesystem | Built on top of HDFS |
-
-HDFS is the foundation — it stores the actual data on disk across nodes. HBase sits on top of HDFS and provides the table structure and real-time access layer. They work **together**, not against each other.
-
----
-
-##  HBase Data Model
-
-HBase uses a **column-oriented data model** that differs significantly from traditional relational databases:
-
-- **Tables** — Data is organized into tables, similar to RDBMS
-- **Row Key** — Each row has a unique identifier (the row key), used for fast lookups
-- **Column Families** — Instead of fixed columns, HBase uses column families (e.g., `info`, `metrics`). These must be defined when the table is created.
-- **Columns** — Columns live inside column families and can be added dynamically (no fixed schema required)
-- **Versioning** — HBase automatically stores multiple versions of a cell's value using **timestamps**, allowing retrieval of historical data
-
-**Example structure** for a student table:
-
-```
-Row Key     | info:name     | info:grade   | info:major
-------------|---------------|--------------|------------
-student_001 | Alice Johnson | A            | Computer Science
-student_002 | Bob Smith     | B+           | Data Science
-student_002 | Maija Sam     |              | Data Science
+### 1. Install Java 11
+Spark requires **Java 8+, but Spark 3.5.x recommends Java 11**, so we install it manually.
+```python
+# Install Java 11 (required for Apache Spark)
+!apt-get update -qq
+!apt-get install -qq openjdk-11-jdk-headless
 ```
 
-Unlike a relational database, not every row needs to have every column — HBase handles **sparse data** efficiently.
+### 2. Download Spark 3.5.2 (Hadoop 3)
+We download the official precompiled binary distribution of Apache Spark version 3.5.2 (built for Hadoop 3).
+This Spark distribution includes:
+- The Spark engine (JVM-based execution framework)
+- Built-in libraries and JAR files
+- The bin/ scripts (spark-submit, spark-shell, etc.)
+- The PySpark module inside the /python/ directory
 
----
+This means the Spark binary already contains PySpark — we are not installing a separate Spark engine through pip.
+  
+```python
+# Download and extract Spark 3.5.2 (Hadoop 3)
+!wget -q https://archive.apache.org/dist/spark/spark-3.5.2/spark-3.5.2-bin-hadoop3.tgz
+!tar xf spark-3.5.2-bin-hadoop3.tgz
+```
+### 3. Install findspark
 
-##  Setup Instructions
+Although the Spark binary already contains `PySpark`, Python needs to know where Spark is installed.
+We install `findspark` so Python can locate the Spark installation defined by `SPARK_HOME` and properly load the built-in PySpark module from the Spark distribution.
 
-### Step 1: Install Oracle VirtualBox
-
-- Download Oracle VirtualBox from the official website: https://www.virtualbox.org/wiki/Downloads
-- Select the version matching your operating system (Windows, macOS, or Linux) and install using the default settings.
-
----
-
-### Step 2: Download Cloudera QuickStart VM
-
-- Download the Cloudera QuickStart VM, which comes pre-configured with Hadoop, HDFS, HBase, and other ecosystem tools: https://downloads.cloudera.com/demo_vm/virtualbox/cloudera-quickstart-vm-5.13.0-0-virtualbox.zip
-- The file is approximately **5 GB** as a `.zip` archive — use a stable internet connection.
-- After downloading: extract the `.zip` file. You will find a folder containing an **`.ovf` file** — this is what you will use in the next step.
-
----
-
-### Step 3: Import VM into VirtualBox
-
-1. Open Oracle VirtualBox
-2. Click **File → Import Appliance**
-3. Browse to the extracted folder and select the **`.ovf` file**
-4. Click **Next** and click **Finish**. Wait for the process to complete — this may take several minutes
-
----
-
-### Step 4: Configure Virtual Machine Settings
-
-Before starting the VM, verify the following settings by selecting the VM and clicking **Settings**:
-
-**System**
-- Go to **Settings → System → Motherboard**: set RAM to at least **5120 MB (5 GB).** If you have enough RAM, go fo **8 GB**.
-- Go to **Settings → System → Processor**: set at least **2 CPU cores****Display**
-- Go to **Settings → Display**: set Video Memory to **128 MB**
-- Use **NAT** for basic connectivity (default)
-
-
-Cloudera services are resource-intensive on a single-node setup. Allocating less than 5 GB of RAM will result in slow or failed service starts.
-
-
----
-
-### Step 5: Start the Cloudera VM and Launch Cloudera Express
-
-Select the imported VM and click **Start**. The VM will boot into a Linux desktop. This may take **2–5 minutes** on first launch.
-Once the desktop loads, open a **Terminal** and run the following command to switch to Cloudera Express and restart all cluster services:
-
-```bash
-sudo /home/cloudera/cloudera-manager --express --force
+```python
+# Install findspark so Python can locate SPARK_HOME
+!pip -q install findspark
 ```
 
-This command shuts down existing services, switches the edition to **Cloudera Express**, and restarts the SCM Server and Agents. This process can take **3–5 minutes**. Wait until the terminal confirms services have restarted before proceeding.
-Cloudera uses SCM server. Unlike standard Apache Hadoop where you manually start services using shell scripts, Cloudera uses the **SCM (Service Control Manager) Server** to manage all services centrally. The SCM Server communicates instructions to SCM Agents running on each node, which handle the actual starting and stopping of services. On this single-node VM, both the server and agent run on the same machine.
+### 4. Set Environment Variables
+```python
+import os
 
----
+# Set JAVA_HOME to Java 11 path
+os.environ["JAVA_HOME"] = "/usr/lib/jvm/java-11-openjdk-amd64"
 
-### Step 6: Access the Cloudera Admin Console
+# Set SPARK_HOME to the folder you just extracted
+os.environ["SPARK_HOME"] = "/content/spark-3.5.2-bin-hadoop3"
 
-Once the SCM components are active, open the browser inside the VM and navigate to:
+# Prepend Spark bin to PATH
+os.environ["PATH"] = os.environ["SPARK_HOME"] + "/bin:" + os.environ["PATH"]
 
-```
-http://localhost:7180
-```
+# Prepend Java bin to PATH
+os.environ["PATH"] = os.environ["JAVA_HOME"] + "/bin:" + os.environ["PATH"]
 
-Log in with the default credentials:
-
-```
-Username: cloudera
-Password: cloudera
-```
-
-This is the **Cloudera Manager Admin Console** — a web UI where you can monitor and manage all cluster services. Try to familiarize yourself with the environment.
-
----
-
-### Step 7: Remove Unnecessary Services (Recommended)
-
-Because this is a single-node setup, running all services simultaneously is very resource-heavy. To improve performance, remove the following services from Cloudera Manager:
-
-- **Key-Value Store Indexer**
-- **Solr**
-- **Sqoop 2**
-
-For each service:
-1. Click on the service name in the Admin Console
-2. Select **Actions → Delete**
-3. Confirm the deletion
-
-Please note that **Solr and Sqoop 2** are used internally by **Hue**. When you attempt to delete them, Cloudera Manager will display a **"Configure Service Dependency"** button instead of proceeding. Click it — this loads the Hue configuration page where the dependency is listed. Set the value to **None** and save. Once saved, return and delete the service as normal.
-
-Removing these services frees up significant memory and CPU, making the remaining services run faster.
-
----
-
-### Step 8: Restart the Cluster and Verify
-
-After removing unnecessary services, restart the cluster:
-
-1. In the Admin Console, click **Actions → Restart** at the cluster level
-2. Wait for all remaining services to show a **green status**
-
-You can also verify service status from the terminal:
-
-```bash
-sudo service cloudera-scm-server status
-sudo service cloudera-scm-agent status
+# Optional: check versions
+!java -version
+!echo $SPARK_HOME
 ```
 
-Both should return `running`. Once all services are green, your environment is ready to proceed.
 
----
+### 5. Initialize Spark
+Now we create the `SparkSession`, which is the entry point to all Spark functionality. Every Spark program starts with a `SparkSession`. It connects the notebook to the Spark engine and allows creation of DataFrames, SQL queries, and distributed operations.
 
-### Step 9: Open the HBase Shell
+```python
+import findspark
+findspark.init()
 
-Open a Terminal inside the VM and launch the interactive HBase shell:
+from pyspark.sql import SparkSession
 
-```bash
-hbase shell
+spark = SparkSession.builder \
+    .appName("CYT180 - Colab Spark 3.5.2 Lab") \
+    .getOrCreate()
+
+spark
 ```
 
-You should see a prompt like:
+### 6. Verify Your Environment
+Before continuing, confirm that Spark is installed and configured correctly.
+If anything failed during installation (Java mismatch, corrupted download, missing environment variables), this check will reveal it immediately.
 
+```python
+import pyspark
+print("PySpark version:", pyspark.__version__)
+print("Spark master:", spark.sparkContext.master)
+print("Default parallelism:", spark.sparkContext.defaultParallelism)
+print("Python version (driver):", spark.sparkContext.pythonVer)
 ```
-HBase Shell; enter 'help<RETURN>' for list of supported commands.
-Type "exit<RETURN>" to leave the HBase Shell
-Version ...
+Notice that Spark runs in local[*] mode in Colab. This means Spark uses all available CPU cores in a single machine, not a real cluster. There is no external cluster manager being used, Spark uses an internal built-in scheduler.
 
-hbase(main):001:0>
+----
+
+## Section 2 — Creating a Simple DataFrame in PySpark
+In this section, you will create your first PySpark DataFrame directly in memory.
+This demonstrates how Spark structures data, infers schema, and provides basic descriptive statistics.
+Unlike pandas, which loads data directly into local memory, Spark stores data in a distributed format that allows scaling to much larger datasets.
+
+### 1. Creating an In-Memory DataFrame
+We can manually define rows and column names, then pass them to spark.createDataFrame().
+
+```python
+from pyspark.sql import functions as F
+
+data = [
+    ('John',  '', 'Smith', '2000-01-01', 'M', 100000),
+    ('Jane',  '', 'Smith', '1990-01-01', 'F', 150000),
+    ('Jonas', '', 'Smith', '1995-01-01', 'M', 120000),
+]
+
+columns = ["firstname", "middlename", "lastname", "dob", "gender", "salary"]
+
+df_small = spark.createDataFrame(data=data, schema=columns)
+
+df_small.show()
+df_small.printSchema()
 ```
+The above example:
+- Creates a Spark DataFrame with six columns.
+- Prints the data in a table format.
+- Shows the inferred schema (Spark assigns types like string, bigint, etc.).
 
-You are now ready to begin the hands-on exercises. All commands in the next section are entered at this prompt.
-
----
-
-## Getting Started with HBase 
-
-> All commands are run inside the **HBase shell** unless stated otherwise.
-
-### Exercise 1: Create a Table
-
-In HBase, tables must be created with at least one **column family**. In this exercise, you will create a table called `students` with a column family called `info`.
-
-**Command:**
-
-```hbase
-create 'students', 'info'
+### 2. Getting Summary Statistics
+Spark can quickly compute summary statistics across numeric columns:
+```python
+df_small.describe().show()
 ```
+This provides the count, mean, standard deviation, min, and max for numeric columns (like salary).
+Spark performs these operations in parallel, which becomes extremely powerful on large datasets.
 
-**Verify the table was created:**
+### 3. Review Questions
+Record your answers for the following questions:
+- What data types did Spark infer for each column? Check using printSchema().
+- Is describe() a transformation or an action? Why?
+- Add a new column called age_rough using: `age_rough = 2025 - year(to_date(dob))` and show the updated DataFrame.
 
-```hbase
-list
-```
+----
 
-You should see `students` in the output.
+## Section 3 — Load a Real Dataset (OWID COVID‑19) and Explore
+In this section, you will load a real CSV dataset (Our World in Data COVID‑19) into a Spark DataFrame, inspect its schema, convert data types, and perform basic exploratory operations. This mirrors a typical workflow used in data analytics and data engineering: <br>
+**load → inspect → clean/convert → explore**
 
-**Check table details:**
+### 1. Download and Load the Dataset
+We’ll download the CSV locally in Colab and let Spark load it from `/content`.
 
-```hbase
-describe 'students'
-```
+The parameter `inferSchema=True` helps Spark detect numeric types automatically.
 
-This shows the table structure including the column family and its default settings.
-HBase is registering the table metadata and preparing storage regions on HDFS. The column family `info` is the container under which all columns for this table will live.
+```python
+import requests, pathlib
 
----
+url = "https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv"
+local_path = pathlib.Path("/content/owid-covid-data.csv")
 
-### Exercise 2: Insert Data
+if not local_path.exists():
+    r = requests.get(url, timeout=60)
+    r.raise_for_status()
+    local_path.write_bytes(r.content)
 
-Use the `put` command to insert data. Each `put` targets a specific **table**, **row key**, **column** (in `family:qualifier` format), and **value**.
+df = spark.read.csv(str(local_path), header=True, inferSchema=True)
 
-**Insert three student records:**
-
-```hbase
-put 'students', 'student_001', 'info:name', 'Alice Johnson'
-put 'students', 'student_001', 'info:grade', 'A'
-put 'students', 'student_001', 'info:major', 'Computer Science'
-
-put 'students', 'student_002', 'info:name', 'Bob Smith'
-put 'students', 'student_002', 'info:grade', 'B+'
-put 'students', 'student_002', 'info:major', 'Data Science'
-
-put 'students', 'student_003', 'info:name', 'Carol White'
-put 'students', 'student_003', 'info:grade', 'A-'
-put 'students', 'student_003', 'info:major', 'Information Systems'
-```
-
-Each `put` writes a value to a specific cell (row + column intersection). HBase stores a **timestamp** automatically with every write — this is how versioning works. Running the same `put` again with a new value does not overwrite; it adds a new version.
-
----
-
-### Exercise 3: Query Data
-
-HBase provides two main ways to retrieve data: `get` (single row) and `scan` (multiple rows).
-
-**Retrieve a single row by row key:**
-
-```hbase
-get 'students', 'student_001'
-```
-
-**Retrieve a specific column for a row:**
-
-```hbase
-get 'students', 'student_001', 'info:name'
-```
-
-**Scan the entire table** (returns all rows):
-
-```hbase
-scan 'students'
+print("Row count (may take a few seconds):", df.count())
+df.printSchema()
 ```
 
-The `scan` command reads across multiple rows in sequence, similar to a `SELECT *` in SQL. It is powerful but can be slow on very large tables since it reads every row. For large datasets, scans are typically filtered using conditions. For this lab, scanning your small table is perfectly appropriate.
+### 2. Convert the date Column Properly
+Even with `inferSchema=True`, `date` columns is often load as strings in CSVs. We will convert `date` column to an actual date type so time‑based operations (like ordering, windows, and date math) work correctly.
 
-**Scan with a filter** (retrieve only names):
+``` python
+from pyspark.sql import functions as F
 
-```hbase
-scan 'students', {COLUMNS => 'info:name'}
+df2 = df.withColumn("date", F.to_date("date"))
+df2.select("location", "date", "new_cases", "new_deaths").show(5)
+df2.printSchema()
+```
+- `withColumn()` creates a new `date` column cast to Spark’s date type.
+- Verifies the new type via printSchema() and shows a sample.
+
+### 3. Create an Analytical Subset
+In real data processing, analysts often create focused subsets of large datasets. Your task is to create a smaller analytical DataFrame that includes: 
+- Only these 5 countries:
+  - United States
+  - Canada
+  - India
+  - Brazil
+  - Italy
+- Only the most recent 120 days of data.
+- Then you will:
+  - Show the row count of your subset
+  - Display the first 10 rows
+ 
+ ```python
+# Step 1: Define the selected countries
+countries = ["United States", "Canada", "India", "Brazil", "Italy"]
+
+# Step 2: Filter for those locations
+df_subset = df2.filter(F.col("location").isin(countries))
+
+# Step 3: Determine the most recent date in this filtered data
+max_date = df_subset.agg(F.max("date")).first()[0]
+
+# Step 4: Keep only the last 120 days
+N = 120
+df_subset = df_subset.filter(F.col("date") >= F.date_sub(F.lit(max_date), N))
+
+# Step 5: Preview the subset
+print("Number of rows in subset:", df_subset.count())
+df_subset.select("location", "date", "new_cases", "new_deaths").show(10)
 ```
 
- `get` performs a direct row key lookup, which is very fast. `scan` reads sequentially across rows, which is useful when you don't know the row key in advance or want to retrieve a range of records.
+This task should help you learn:
+- How to apply multi-condition filtering using .isin()
+- How to compute an aggregated value (max(date))
+- How to use date arithmetic to define a time window
+- How transformations combine into a pipeline
+- How actions (count, show) trigger computation
 
----
+### 4. Filter and Order the Data
+Let’s answer a simple question: What are the latest records for the United States?
+```python
+(df2
+ .filter(F.col("location") == "United States")
+ .orderBy(F.desc("date"))
+ .select("location", "date", "new_cases", "new_deaths")
+ .show(10))
+```
+Here:
+- **filter** and **orderBy** are transformations (they build a plan).
+- **show()** is an action (it executes the plan).
 
-### Exercise 4: Delete Data
+### 5. Aggregate: Total New Cases by Location
+Compute total new cases grouped by location.
 
-HBase supports deleting a specific cell, a specific column in a row, or an entire row.
+```python
+agg_cases = (df2
+    .groupBy("location")
+    .agg(F.sum("new_cases").alias("total_new_cases"))
+    .orderBy(F.desc("total_new_cases"))
+)
 
-**Delete a specific cell (one column value):**
+agg_cases.show(10, truncate=False)
+```
+This step should help you learn:
+- Combining groupBy and agg for summary statistics.
+- show() triggers execution.
+- These patterns are essential for Spark SQL and analytics.
 
-```hbase
-delete 'students', 'student_003', 'info:grade'
+### 6. Review Questions
+- What data types were inferred for date, location, and new_cases before and after conversion in step 2?
+- Identify one transformation and one action from step 4 and step 5.
+- Show the latest 10 records for Canada (modify step 4).
+- Modify step 5 to compute total new deaths by location.
+- In step 3, what is the row count of your subset and what do the first 10 rows look like?
+- Why is creating analytical subsets useful when working with large datasets?
+
+----
+
+## Section 4 — Transformations, Actions, and a 7‑Day Moving Average
+In this section, you will deepen your understanding of how Spark processes data. Spark uses a lazy execution model, where transformations build up a computation plan and actions trigger execution. You will also compute a 7‑day moving average using Spark window functions — a common analytic technique when working with time‑series data.
+
+### 1. Transformations vs. Actions
+Let’s begin by reviewing the difference:
+- **Transformations** These define operations on a DataFrame but do not execute immediately. Examples: select, filter, orderBy, groupBy, withColumn.
+- **Actions**: These trigger execution and return a result. Examples: show, count, take, collect.
+Knowing the difference is essential for understanding performance, execution plans, and caching.
+
+### 2. Compute a 7‑Day Moving Average of New Cases
+Time‑series analysis often uses moving averages to smooth daily fluctuations.
+Here, you will calculate a 7‑day rolling average of `new_cases` for each country.
+
+**Define a window specification**
+```python
+from pyspark.sql.window import Window
+
+w = Window.partitionBy("location").orderBy("date").rowsBetween(-6, 0)
+```
+**Add the 7‑day average column**
+
+```python
+df3 = df2.withColumn("new_cases_7d_avg", F.avg("new_cases").over(w))
+
+df3.select("location", "date", "new_cases", "new_cases_7d_avg") \
+   .filter(F.col("location").isin("United States", "Canada")) \
+   .orderBy("location", "date") \
+   .show(12)
+```
+**What you should observe:**
+
+- Rows now include both the raw new_cases and a smoothed new_cases_7d_avg.
+- The first few dates for each location may show null if fewer than 7 days exist.
+
+### 3. Why Moving Averages Matter
+Daily case counts often fluctuate due to reporting delays, weekend effects, and batch updates.
+A 7‑day average:
+
+- reduces noise
+- reveals general trends
+- is widely used in epidemiology, finance, and operations analytics
+
+### 4. Review Questions
+- Modify the code to show the top 5 dates for Canada with the highest new_cases_7d_avg.
+- In one sentence, explain why moving averages are useful in time‑series analysis.
+
+
+----
+
+## Section 5 — Performance: Lazy Evaluation
+Spark is designed for distributed computing, and to achieve high performance it uses several key concepts one of which is lazy evaluation.
+In this section, you will observe these behaviors directly.
+Spark does not execute transformations immediately.
+Instead, it builds a logical plan describing what should be done. Execution only begins when an action is called. The following code prints Spark’s logical and physical execution plans. It does not run the computations.
+
+**View the Execution Plan (Does NOT run the job)**
+```python
+agg_cases.explain(mode="formatted")
+```
+**Trigger Execution With an Action**
+```python
+# count() is an action, so Spark executes the entire plan.
+print("Number of rows in agg_cases:", agg_cases.count())
 ```
 
-**Verify the deletion:**
+----
 
-```hbase
-get 'students', 'student_003'
-```
 
-The `info:grade` column should no longer appear.
+## Submission Instructions
 
-**Delete an entire row:**
+Submit **screenshots** that clearly show the work you completed in this lab. 
+Your screenshots **must include** the following:
 
-```hbase
-deleteall 'students', 'student_002'
-```
+1. **Section 1:** Screenshot of Spark successfully initialized.
+2. **Section 2**
+  - Screenshot of df_small.describe().show()
+  - Screenshot showing your added column age_rough
+3. **Section 3**
+    - Screenshot of df2.printSchema() after converting the date.
+    - Screenshot of your subset row count
+    - Screenshot of your latest 10 records for Canada
+    - Screenshot of total new deaths by location
 
-**Verify:**
+4. **Section 4 :** Screenshot showing the Hadoop streaming command and job completion
+   - Screenshot of 7‑day moving average for the United States (first 12 rows)
+   - Screenshot of top 5 days for Canada by new_cases_7d_avg
 
-```hbase
-scan 'students'
-```
-
-`student_002` should no longer appear in results.
-
-HBase deletions work through **tombstone markers** — a special marker is written to indicate the cell or row is deleted. The actual data is removed during a background process called **compaction**. This is why deletions in HBase are fast even on large datasets.
-
-**When finished, exit the HBase shell:**
-
-```hbase
-exit
-```
-
----
-
-##  Reflection Questions
-
-These questions are for your own understanding. **No submission required**. Think through your answers as you complete the lab.
-
-1. Why can't HDFS be used on its own for applications that require frequent data updates? What limitation makes this impractical?
-
-2. How does HBase's column family model differ from a traditional relational database schema? What advantage does this provide for sparse data?
-
-3. You ran both `get` and `scan` commands in Exercise 3. In what scenario would you prefer `get` over `scan`, and why?
-
-4. When you deleted a cell in Exercise 4, the data was not immediately removed from disk — it was marked with a tombstone. Why do you think HBase uses this approach instead of immediately erasing the data?
-
-5. HBase stores multiple versions of each cell using timestamps. Think of a real-world use case where retrieving an older version of a record would be useful.
-
-6. Based on what you learned, describe one situation where you would choose HBase over a traditional relational database, and one situation where a relational database would still be the better choice.
-
----
-
-##  Lab Checklist
-
-Use this checklist to confirm your setup and prepare for your live demonstration.
-
-### Environment Setup
-
-- [ ] Oracle VirtualBox installed and launching correctly
-- [ ] Cloudera QuickStart VM downloaded and extracted using 7-Zip
-- [ ] VM imported into VirtualBox with correct RAM (≥ 5 GB) and CPU (≥ 2 cores) settings
-- [ ] Cloudera Express launched successfully via terminal command
-- [ ] Cloudera Admin Console accessible at `localhost:7180`
-- [ ] Unnecessary services (Key-Value Store, Solr, Sqoop 2) removed
-- [ ] Cluster restarted and all services showing green status
-- [ ] `hbase shell` opens successfully
-
-### Live Demonstration
-
-- [ ] Design and create a table of your choice with **two column families**.
-- [ ] Insert **3 rows** of data, ensuring that at least 1 rows have **sparse data** (i.e. some columns are intentionally missing from certain rows).
-- [ ] Retrieve a single row using `get`
-- [ ] Scan the full table using `scan`
-- [ ] Delete a specific cell and verify it is removed
-- [ ] Delete an entire row and verify it is removed
-- [ ] Able to explain what a column family is when asked
+5. **Section 5 :**
+   - Screenshot of your execution plan (agg_cases.explain())
+   - Screenshot of the action execution (agg_cases.count() output)
+6. **Written Answers to Reflection Questions from each section**
+   - Include your answers directly beneath the relevant screenshot.
+   - Answers should be short (1–2 sentences each)
+7. Work should be complete, well organized and professionally presented. Too small, blurry or containing irrelevant output in screenshots will lead a deduction in marks up to 100%
+8. Show current date/time and your unique username to prove the ownership of work.
