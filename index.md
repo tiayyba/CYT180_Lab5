@@ -226,7 +226,6 @@ df_small.describe().show()
 ### 3. Review Questions
 
 - What data type did Spark give each column? (Use `printSchema()`.)
-- Is `describe().show()` a transformation or an action? Why?
 - Add a new column called `age_rough` and show the updated DataFrame. Use:
 
   ```python
