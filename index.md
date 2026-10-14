@@ -358,10 +358,8 @@ agg_cases.show(10, truncate=False)
 
 - What data type does the `date` column have in `df` (step 1) and in `df2` (step 2)? Did `to_date()` change it? Why is it still a good idea to convert dates yourself?
 - What data types did Spark give `location` and `new_cases`?
-- Name one transformation and one action from step 4 or step 5.
 - Show the latest 10 records for Canada (change step 4).
 - Change step 5 to calculate total new deaths by location.
-- In step 3, how many rows are in your subset, and what do the first 10 rows show?
 - Why is it useful to make a smaller subset when working with a large dataset?
 
 ---
