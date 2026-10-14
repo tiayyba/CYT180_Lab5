@@ -68,8 +68,6 @@ Next we download Spark and unpack it. The download is a ready-to-use copy of Spa
 !tar xf spark-3.5.2-bin-hadoop3.tgz
 ```
 
-#### What does “bin-hadoop3” mean? Are we using Hadoop?
-
 The file is called `spark-3.5.2-bin-hadoop3`. This name means **“Spark version 3.5.2, ready to run, made to work with Hadoop 3.”** It does **not** mean that we are running Hadoop.
 
 Here is what is really going on:
