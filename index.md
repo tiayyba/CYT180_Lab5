@@ -15,7 +15,7 @@ Spark supports development in Scala, Python, Java, and R, making it accessible t
 
 In this lab, you will explore Apache Spark’s core concepts, learn how distributed data processing works, and gain hands‑on experience using Spark to manipulate and analyze large datasets. This foundation will prepare you for more advanced topics, including machine learning pipelines, streaming data, and large‑scale analytics.
 
-PySpark is the Python interface for Apache Spark, useful for distributed data processing and pipelines. Even on modest data, Spark’s DataFrame API and Spark SQL can make many data‑wrangling tasks shorter, clearer, and easier to maintain than pandas.
+PySpark is the Python interface for Apache Spark, useful for distributed data processing and pipelines. 
 
 Docs: <http://spark.apache.org/docs/latest/api/python/>
 
