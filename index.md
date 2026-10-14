@@ -141,8 +141,8 @@ What each line does:
 3. `SparkSession.builder` starts building the configuration for the Spark session we want to use.
 4. `.appName("CYT180 Lab 5")` gives our program a name. On a cluster, this name shows up in the list of running jobs.
 5. `.master("local[*]")` specifies where and how Spark will run. It sets the **mode**:
-   - `local` means: run on this one computer, rather than using a cluster manager.
-   - `[*]` means: use **all** available logical CPU cores on this computer to execute tasks in parallel.
+   - `local` means run on this one computer, rather than using a cluster manager.
+   - `[*]` means use **all** available logical CPU cores on this computer to execute tasks in parallel.
 6. `.getOrCreate()` creates the session. If one already exists, it reuses it instead of making a second one.
 
 **So our Spark session runs in local mode (`local[*]`) on one Colab computer, using all of its CPU cores.**
